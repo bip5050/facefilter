@@ -38,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "travis-ci-cloudfront-invalidation": "^1.1.0"
   }
 }
