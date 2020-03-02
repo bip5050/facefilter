@@ -2,9 +2,7 @@ const Struct = (...keys) => ((...v) => keys.reduce((o, k, i) => {o[k] = v[i]; re
 
 const ProductCategories = {
     EYEWEAR:'Eyewear',
-    BEAUTY:'Beauty',
-    LIFESTYLE: 'Lifestyle',
-    FASHION: 'Fashion'
+    LIPSTICK:'Lipstick'
 }
 
 const Product = Struct('id', 'category', 'name', 'previewImageUrl', 'data')

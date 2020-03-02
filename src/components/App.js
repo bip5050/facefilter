@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Header from './Header'
-import { initApp } from './JeelizDemo';
-import FaceFilter from './FaceFilter';
 import CameraPermissionOverlay from './CameraPermissionOverlay'
 import CameraButton from './CameraButton'
 import SharingModal from './SharingModal'
 import { ProductCategories } from './Products'
 import  ProductList from './MockProductProvider'
 import ProductMenu from './ProductMenu'
+import FaceFilter from './FaceFilter'
+
 
 export default class App extends Component {
 
@@ -22,7 +22,9 @@ export default class App extends Component {
   initApp = (e) => {
     e.preventDefault()
     this.setState({ displayOverlay: false })
-    initApp()
+
+    console.log("App init haappens here");
+
   }
 
   closeSharingModal = (e) => {
@@ -45,7 +47,7 @@ export default class App extends Component {
         <CameraPermissionOverlay display={this.state.displayOverlay} onClose={this.initApp} />
         <Header currentProductCategory={this.state.currentProductCategory} onCategorySelected={this.onCategorySelected} />
         <ProductMenu productCategory={this.state.currentProductCategory} products={this.state.products} currentProduct={this.state.currentProduct} onProductSelected={this.onProductSelected} />
-        <FaceFilter />
+        <FaceFilter/>
         <CameraButton />
         <SharingModal showModal={this.state.displaySharingModal} onClose={this.closeSharingModal} />
       </div>

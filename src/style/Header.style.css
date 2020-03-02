@@ -15,18 +15,13 @@
   height: 100%;
 }
 
-
 .menu .logo {
-  text-indent: -9999999px;
   display: inline-block;
   height: 100%;
   width: 92px;
   padding:5px;
-  background-image: url(../img/logo.png);
-  background-size: cover 100%;
-  background-repeat: no-repeat;
-  background-position: center;
   margin: 0;
+  font-size:2em;
 }
 
 .Dropdown-root {
@@ -42,7 +37,7 @@
   border: 0x;
   cursor: default;
   outline: none;
-  padding: 8px 35px 8px 10px;
+  padding: .5em 1em .5em .5em;
   transition: all 200ms ease;
   text-align:right;
 }
@@ -57,8 +52,8 @@
   height: 0;
   margin-top: -ceil(2.5);
   position: absolute;
-  right: 10px;
-  top: 15px;
+  right: 0;
+  top: 1.1em;
   width: 0
 }
 
@@ -78,12 +73,14 @@
   position: absolute;
   top: 100%;
   width: 100%;
-  z-index: 1000;
+  z-index: 10000;
   -webkit-overflow-scrolling: touch;
 }
 
 .Dropdown-menu .Dropdown-group > .Dropdown-title {
   padding: 8px 10px;
+  z-index: 10000;
+
   color: rgba(51, 51, 51, 1.2);
   font-weight: bold;
   text-transform: capitalize;
@@ -91,10 +88,16 @@
 
 .Dropdown-option {
   box-sizing: border-box;
+  z-index: 10000;
   color: rgba(51, 51, 51, 0.8);
   cursor: pointer;
   display: block;
   padding: 8px 10px;
+  text-transform:lowercase;
+}
+
+.Dropdown-placeholder {
+  font-size:1.25em;
 }
 
 .Dropdown-option:last-child {

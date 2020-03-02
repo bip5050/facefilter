@@ -1,12 +1,31 @@
-import React from "react";
 
-const FaceFilter = (props) => {
+import React, { Component } from 'react'
+import '../style/FaceFilter.style.css';
+import init from "../js/render.js";
+
+// <script type="module" src="render.js"></script>
+
+export default class ProductMenu extends Component {
+
+  componentDidMount() {
+    init();
+  }
+
+  render() {
     return (
-      <div className="FaceFilter">
-          <canvas className="faceFilterCanvas" width="1024" height="1024" id='jeeFaceFilterCanvas'></canvas>
-          <div className="faceFilterCanvas" id='jeelizFaceFilterFollow'></div>
-          </div>
-    )
+  <div className="container">
+  
+
+    <div id="facef-sdk-wrapper">
+      <video id="facef-sdk-video" playsinline autoplay></video>
+      <canvas id="facef-sdk-canvas"></canvas>
+    </div>
+
+    <label for="progress-bar">Init. progress: </label>
+    <progress id="progress-bar" max="100" value="0"></progress>
+  
+    </div>
+      )};
+  
 }
 
-export default FaceFilter
