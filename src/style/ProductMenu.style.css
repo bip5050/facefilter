@@ -1,0 +1,17 @@
+.productMenu {
+  width:100%;
+  background-color:rgba(255, 255, 255, 0.7);
+  text-align:center;
+  height:2em;
+  position:fixed;
+  margin-top:3em;
+  padding:0;
+  z-index:1000;
+}
+
+.productMenu .productMenuItem {
+padding:1em;
+margin-left:1em;
+margin-right:1em;
+text-transform: lowercase;
+}

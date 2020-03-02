@@ -1,0 +1,21 @@
+.sharingModal {
+  width: 90%;
+  height: 95%;
+  margin: 2.5% 5%;
+  padding: .25em;
+  background-color: #eeeeee;
+  text-align: center;
+  position: fixed;
+  top: 0px;
+  z-index: 10000;
+  text-align: center;
+}
+
+.sharingModal .closeSharingModal {
+  margin: 1%;
+  background-color: none;
+  background: none;
+  box-shadow: none;
+  border: 0;
+  font-size: 2em;
+}

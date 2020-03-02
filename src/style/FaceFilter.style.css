@@ -1,0 +1,46 @@
+.container {
+  width: 90%;
+  height: 95%;
+  margin: 2.5% 5%;
+  padding: .25em;
+  background-color: #eeeeee;
+  text-align: center;
+  position: fixed;
+  top: 0px;
+  z-index: 10000;
+  text-align: center;
+}
+
+.tos {
+  width: 96%;
+  height: 90%;
+  padding: 1%;
+  margin: 1%;
+  overflow-y: scroll;
+  overflow-x: wrap;
+  background-color: #dddddd;
+  text-align: left;
+  scrollbar-color: #592411 #cccccc;
+  top: 0px;
+}
+
+.tos h1, .tos h2, .tos p {
+  margin-bottom: 1em;
+}
+
+.closeWindow {
+  margin: 1%;
+  color: #0075bf;
+  background-color: none;
+  background: none;
+  box-shadow: none;
+  border: 0;
+  font-size: 2em;
+}
+
+.closeWindow:hover {
+  color: #005488;
+  box-shadow: none;
+  border: 0;
+  font-size: 2em;
+}
