@@ -1,46 +1,61 @@
-.container {
-  width: 90%;
-  height: 95%;
-  margin: 2.5% 5%;
-  padding: .25em;
-  background-color: #eeeeee;
-  text-align: center;
+#facef-sdk-wrapper {
   position: fixed;
-  top: 0px;
-  z-index: 10000;
-  text-align: center;
+  margin:0px;
+  z-index:-1;
+  min-width:100%;
+  min-height:100%;
+  width:100%;
+  height:100%;
+  
+}
+#facef-sdk-video {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width:100%;
+  min-height:100%;
+  width:100%;
+  height:100%;
+  
 }
 
-.tos {
-  width: 96%;
-  height: 90%;
-  padding: 1%;
-  margin: 1%;
-  overflow-y: scroll;
-  overflow-x: wrap;
-  background-color: #dddddd;
-  text-align: left;
-  scrollbar-color: #592411 #cccccc;
-  top: 0px;
+#facef-sdk-canvas {
+  position: relative;
+  left: 0;
+  top: 0;
+  min-width:100%;
+  min-height:100%;
+  width:100%;
+  height:100%;
+
+  z-index:1000000;
 }
 
-.tos h1, .tos h2, .tos p {
-  margin-bottom: 1em;
+#progress-bar[value] {
+  position:fixed;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:40%;
+  text-align:center;
+  width: 400px;
+  height: 15px;
+  -webkit-appearance: none;
 }
 
-.closeWindow {
-  margin: 1%;
-  color: #0075bf;
-  background-color: none;
-  background: none;
-  box-shadow: none;
-  border: 0;
-  font-size: 2em;
+.red-button {
+  padding: 20px;
+  border-radius: 33px;
+  background: red;
 }
 
-.closeWindow:hover {
-  color: #005488;
-  box-shadow: none;
-  border: 0;
-  font-size: 2em;
+.green-button {
+  padding: 20px;
+  border-radius: 33px;
+  background: green;
+}
+
+.videosource{
+  display: none;
+  min-width:100%;
+  min-height:100%;
 }

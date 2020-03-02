@@ -7,6 +7,7 @@ import { ProductCategories } from './Products'
 import  ProductList from './MockProductProvider'
 import ProductMenu from './ProductMenu'
 import FaceFilter from './FaceFilter'
+import init from "../js/render.js";
 
 
 export default class App extends Component {
@@ -22,7 +23,7 @@ export default class App extends Component {
   initApp = (e) => {
     e.preventDefault()
     this.setState({ displayOverlay: false })
-
+  init();
     console.log("App init haappens here");
 
   }

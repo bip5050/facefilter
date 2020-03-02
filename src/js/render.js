@@ -1,9 +1,9 @@
 
 import * as THREE from 'three';
 import {isVideoReady, getVideoCanvas, getVideo, initVideoCapture} from './camera.js';
-const progressBar = document.getElementById('progress-bar');
+const path = require('path')
 
-let mirror = true;
+let mirror = false;
 let renderer;
 let camera2D;
 let camera3D;
@@ -23,32 +23,33 @@ const lipstickRange = document.getElementById('myRange');
 const mascaraRange = document.getElementById('myMascara');
 
 
-const redbutton = document.getElementById('red-button');
-const greenButton = document.getElementById('green-button');
+// const redbutton = document.getElementById('red-button');
+// const greenButton = document.getElementById('green-button');
 
 
-redbutton.onclick = () => {
-    faceMaterial.color.set('#e73636');
+// redbutton.onclick = () => {
+//     faceMaterial.color.set('#e73636');
+// }
+// greenButton.onclick = () => {
+//     faceMaterial.color.set('#12ff00');
+// }
+// lipstickRange.onchange = (e) => {
+//     faceMaterial.opacity = lipstickRange.value / 100;
+// }
+// mascaraRange.onchange = (e) => {
+//     mascaraMat.opacity = mascaraRange.value / 100;
+// }
+let video;
+let videoCanvas;
 
-}
-greenButton.onclick = () => {
-    faceMaterial.color.set('#12ff00');
+export function initThreejs(fovy) {
+    video = document.getElementById("facef-sdk-video");
+    videoCanvas = document.createElement("canvas");  
 
-}
-
-
-lipstickRange.onchange = (e) => {
-    faceMaterial.opacity = lipstickRange.value / 100;
-}
-mascaraRange.onchange = (e) => {
-    mascaraMat.opacity = mascaraRange.value / 100;
-}
-
-export function initThreejs(fovy, video, videoCanvas) {
 
     // Setup renderer
-    const defaultWidth = 640;
-    const defaultHeight = 480;
+    const defaultWidth = 1280;
+    const defaultHeight = 960;
     renderer = new THREE.WebGLRenderer({
         canvas: document.getElementById('facef-sdk-canvas'),
         alpha: true,
@@ -74,23 +75,24 @@ export function initThreejs(fovy, video, videoCanvas) {
     camera3D.position.set(0, 0, 0);
     scene3D.add(camera3D);
 
-    // Create lights
-    const ambientLight = new THREE.AmbientLight(0x101030);
-    // scene3D.add(ambientLight);
-
     const directionalLight = new THREE.DirectionalLight(0xffeedd);
     directionalLight.position.set(0, 0, 1);
 
     scene3D.add(directionalLight);
 
     // Create texture to apply on face
-    const texture = new THREE.TextureLoader().load('lipstick.png');
+    const texture = new THREE.TextureLoader().load('/face/lipstick.png');
     faceMaterial = new THREE.MeshStandardMaterial({ map: texture, transparent: true });
     faceMaterial.opacity = .6;
     faceMaterial.roughness = .8;
     faceMaterial.blending = THREE.AdditiveBlending;
 
     faceMaterial.color.set('#e73636');
+
+    video.width = window.innerWidth;
+    video.height = window.innerHeight;
+    videoCanvas.width = window.innerWidth;
+    videoCanvas.height = window.innerHeight;
 
     // Create video texture
     videoTexture = new THREE.Texture(videoCanvas);
@@ -110,7 +112,10 @@ export function initThreejs(fovy, video, videoCanvas) {
 
     videoSprite.position.set(0, 0, 1);
     scene2D.add(videoSprite);
+    
+    updateSize(video, videoCanvas);
 
+    //setElementFullScreen(canvas)
 }
 
 var faceGeometryForEyes;
@@ -129,7 +134,7 @@ export function createFaceGeometry(facefVTO) {
 
     faceMask = new THREE.Mesh(faceGeometry, faceMaterial);
     faceGeometryForEyes = faceMask.clone();
-    const texture = new THREE.TextureLoader().load('eyebrows.png');
+    const texture = new THREE.TextureLoader().load('/face/eyebrows.png');
 
     mascaraMat = new THREE.MeshStandardMaterial({ map: texture, transparent: true });
     faceGeometryForEyes.material = mascaraMat;
@@ -180,7 +185,7 @@ export function renderThreejs(facefVTO) {
         // Prepare orientation
         let R = facefVTO.getObjectRotation()
         const pos = new THREE.Vector3();
-        const quat = new THREE.Quaternion;
+        const quat = new THREE.Quaternion();
         const scale = new THREE.Vector3();
         var l_transfMatrix = new THREE.Matrix4();
         l_transfMatrix.set(
@@ -262,15 +267,18 @@ export function renderScene() {
     renderer.render(scene3D, camera3D);
 }
 
-const facefVTO = new window.facef.MagicFace();
 let facefVTOInitialized = false;
 const faceFilterConfig = {
     libPath: 'facef',
     fovY: 50,
 };
+let facefVTO;
 
 export function init() {
-    initThreejs(faceFilterConfig.fovY, getVideo(), getVideoCanvas());
+    initThreejs(faceFilterConfig.fovY);
+    const progressBar = document.getElementById('progress-bar');
+    facefVTO = new window.facef.MagicFace();
+
     facefVTO.initialize(
         faceFilterConfig,
         () => {
@@ -280,6 +288,9 @@ export function init() {
         error => console.log('Error initializing Face Filter: ' + error),
         progress => {
             progressBar.value = progress * 100;
+            if(progress > .99){
+                progressBar.style.display = "none"
+            }
         }
     );
     // -- Initialize Video capture
@@ -287,7 +298,8 @@ export function init() {
 
 }
 
-function processFrame() {
+export function processFrame() {
+    console.log("Process frame called");
     getVideoCanvas().getContext('2d').drawImage(
         getVideo(),
         0,
@@ -298,7 +310,6 @@ function processFrame() {
 
     //if (videoReady && facefVTOInitialized) {
     if (isVideoReady() && facefVTOInitialized) {
-
         // Track
         facefVTO.track(getVideoCanvas());
         renderThreejs(facefVTO);
@@ -310,8 +321,7 @@ function processFrame() {
 
 
 setTimeout(() => {
-    init();
+    //sinit();
 }, 20000);
-processFrame();
 
-export default init();
+export default init;
