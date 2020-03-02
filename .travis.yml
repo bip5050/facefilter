@@ -16,11 +16,12 @@ install:
   - npm install
   - npm i -g travis-ci-cloudfront-invalidation
   - npm i -g react-deploy-cli
-  - CI=false npm run build #use your build script
+  - npm run build #use your build script
 before_script:
   - export RELEASE_HEAD=$(git rev-parse --short HEAD | cut -c1-7)  
   - export RELEASE_HEAD_LONG=$(git rev-parse HEAD)  
   - export CI=true
+script: 'true'
 after_deploy:
 - travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $AWS_CLOUDFRONT_DIST_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST -o 'master,stage'  
 deploy:
