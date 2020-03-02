@@ -23,7 +23,7 @@ before_script:
   - export CI=true
 script: 'true'
 after_deploy:
-- travis-ci-cloudfront-invalidation -a $AWS_ACCESS_KEY -s $AWS_SECRET_KEY -c $AWS_CLOUDFRONT_DIST_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST -o 'master,stage'  
+- travis-ci-cloudfront-invalidation -a $ACCESS_KEY -s $SECRET_ACCESS_KEY -c $AWS_CLOUDFRONT_DIST_ID -i '/*' -b $TRAVIS_BRANCH -p $TRAVIS_PULL_REQUEST -o 'master,stage'  
 deploy:
   skip_cleanup: true
   provider: script
