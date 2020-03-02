@@ -89,11 +89,6 @@ export function initThreejs(fovy) {
 
     faceMaterial.color.set('#e73636');
 
-    video.width = window.outerWidth;
-    video.height = window.outerHeight;
-    videoCanvas.width = window.outerWidth;
-    videoCanvas.height = window.outerHeight;
-
     // Create video texture
     videoTexture = new THREE.Texture(videoCanvas);
     videoTexture.minFilter = THREE.LinearFilter;
@@ -113,6 +108,7 @@ export function initThreejs(fovy) {
     videoSprite.position.set(0, 0, 1);
     scene2D.add(videoSprite);
 
+    updateSize(video, videoCanvas);
     //setElementFullScreen(canvas)
 }
 
@@ -154,7 +150,7 @@ export function updateSize(video, videoCanvas) {
         camera3D.aspect = video.videoWidth / video.videoHeight;
         camera3D.updateProjectionMatrix();
 
-        renderer.setSize(video.videoWidth, video.videoHeight);
+        renderer.setSize(window.outerWidth, window.outerHeight);
 
         // Update video canvas size
         videoCanvas.width = video.videoWidth;
@@ -164,6 +160,12 @@ export function updateSize(video, videoCanvas) {
             mirror ? -video.videoWidth : video.videoWidth,
             video.videoHeight, 1);
     });
+
+    video.width = window.outerWidth;
+    video.height = window.outerHeight;
+    videoCanvas.width = video.width;
+    videoCanvas.height = video.height;
+
 }
 
 export function renderThreejs(facefVTO) {
