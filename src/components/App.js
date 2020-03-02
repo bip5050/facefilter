@@ -24,8 +24,7 @@ export default class App extends Component {
     e.preventDefault()
     this.setState({ displayOverlay: false })
   init();
-    console.log("App init haappens here");
-
+    console.log("App init happens here");
   }
 
   closeSharingModal = (e) => {

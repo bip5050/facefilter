@@ -48,8 +48,8 @@ export function initThreejs(fovy) {
 
 
     // Setup renderer
-    const defaultWidth = 1280;
-    const defaultHeight = 960;
+    const defaultWidth = window.outerWidth;
+    const defaultHeight = window.outerHeight;
     renderer = new THREE.WebGLRenderer({
         canvas: document.getElementById('facef-sdk-canvas'),
         alpha: true,
@@ -89,10 +89,10 @@ export function initThreejs(fovy) {
 
     faceMaterial.color.set('#e73636');
 
-    video.width = window.innerWidth;
-    video.height = window.innerHeight;
-    videoCanvas.width = window.innerWidth;
-    videoCanvas.height = window.innerHeight;
+    video.width = window.outerWidth;
+    video.height = window.outerHeight;
+    videoCanvas.width = window.outerWidth;
+    videoCanvas.height = window.outerHeight;
 
     // Create video texture
     videoTexture = new THREE.Texture(videoCanvas);
@@ -112,8 +112,6 @@ export function initThreejs(fovy) {
 
     videoSprite.position.set(0, 0, 1);
     scene2D.add(videoSprite);
-    
-    updateSize(video, videoCanvas);
 
     //setElementFullScreen(canvas)
 }
