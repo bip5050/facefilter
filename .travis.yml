@@ -15,7 +15,8 @@ cache:
 install:
   - npm install
   - npm i -g react-deploy-cli
-  - npm run build #use your build scriptbefore_script:
+  - npm run build #use your build script
+before_script:
   - export RELEASE_HEAD=$(git rev-parse --short HEAD | cut -c1-7)  
   - export RELEASE_HEAD_LONG=$(git rev-parse HEAD)  
   - export CI=false
