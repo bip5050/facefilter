@@ -1,0 +1,21 @@
+canvas {
+	width:800px;
+	float:right !important;
+}
+
+
+#overlay, .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#facesContainer canvas {
+  margin: 10px;
+}
+
+.viewport {
+    display: inline-block;
+    position: relative;
+    margin: 20px;
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">
+  <link rel="stylesheet" href="style.css">
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/98/three.min.js"></script>
+
+  <script src="lib/face-api.min.js"></script>
+  <script src="lib/common.js"></script>
+  <script src="lib/drawing.js"></script>
+  <script src="lib/render.js"></script>
+  <script src="lib/faceDetectionControls.js"></script>
+</head>
+<body>
+  <div id="navbar"></div>
+  <div class="center-content page-container">
+    <div class="viewport">
+      <video onplay="onPlay(this)" id="inputVideo" autoplay muted></video>
+      <canvas id="overlay" />
+    </div>
+    <div class="viewport">
+      <div id="webgl-canvas"></div>
+    </div>
+
+    <!--div class="row side-by-side">
+
+      <div id="fps_meter" class="row side-by-side">
+        <div>
+          <label for="time">Time:</label>
+          <input disabled value="-" id="time" type="text" class="bold">
+          <label for="fps">Estimated Fps:</label>
+          <input disabled value="-" id="fps" type="text" class="bold">
+        </div>
+      </div>
+
+    </div-->
+  </body>
+
+  <script>
+    let forwardTimes = []
+    let withFaceLandmarks = true;
+    let withBoxes = true;
+
+    function updateTimeStats(timeInMs) {
+      forwardTimes = [timeInMs].concat(forwardTimes).slice(0, 30)
+      const avgTimeInMs = forwardTimes.reduce((total, t) => total + t) / forwardTimes.length
+      $('#time').val(`${Math.round(avgTimeInMs)} ms`)
+      $('#fps').val(`${faceapi.round(1000 / avgTimeInMs)}`)
+    }
+    
+    async function onPlay() {
+      const videoEl = $('#inputVideo').get(0)
+      if(videoEl.paused || videoEl.ended || !isFaceDetectionModelLoaded())
+        return setTimeout(() => onPlay())
+      const options = getFaceDetectorOptions()
+      const ts = Date.now()
+      const faceDetectionTask = faceapi.detectSingleFace(videoEl, options)
+      const result = withFaceLandmarks
+        ? await faceDetectionTask.withFaceLandmarks()
+        : await faceDetectionTask
+      updateTimeStats(Date.now() - ts)
+      const drawFunction = withFaceLandmarks
+        ? drawLandmarks
+        : drawDetections
+      if (result) {
+        drawFunction(videoEl, $('#overlay').get(0), [result], withBoxes)
+      }
+      setTimeout(() => onPlay())
+    }
+
+    async function run() {
+      // load face detection and face landmark models
+      await changeFaceDetector(TINY_FACE_DETECTOR)
+      await faceapi.loadFaceLandmarkModel('/ai-art')
+      changeInputSize(128)
+      // try to access users webcam and stream the images
+      // to the video element
+      const stream = await navigator.mediaDevices.getUserMedia({ video: {} })
+      const videoEl = $('#inputVideo').get(0)
+      videoEl.srcObject = stream
+    }
+    
+    function getJawShape(jaw) {
+        var a = jaw[0];
+        var b = jaw[4];
+        var c = jaw[8];
+
+        var ab = { x: a.x - b.x, y: a.y - b.y};
+        var bc = { x: c.x - b.x, y: c.y - b.y};
+        
+        var dot = ab.x * bc.x + ab.y * bc.y;
+        var mag = Math.sqrt(ab.x * ab.x + ab.y * ab.y) * Math.sqrt(bc.x * bc.x + bc.y * bc.y);
+        
+        var cos = Math.abs(dot/mag);
+
+        if (cos < 0.4) {
+            return 0;
+        } else if (cos < 0.6) {
+            return 1;
+        } else if (cos < 0.7) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+    
+    function getEyeRatio(left, right, jaw) {
+        var a = left[0];
+        var b = right[0];
+        var c = jaw[0];
+        var d = jaw[jaw.length - 1];
+
+        var ratio = Math.abs((a.x - b.x) / (c.x - d.x));
+
+        if (ratio < 0.4) {
+            return 0;
+        } else if (ratio < 0.45) {
+            return 1;
+        } else if (ratio < 0.5) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+    
+    function getEyebrowHeight(leftEye, rightEye, leftEyebrow, rightEyebrow, jaw) {
+        var a = leftEye[0];
+        var b = rightEye[0];
+        var c = leftEyebrow[0];
+        var d = rightEyebrow[0];
+        var e = jaw[0];
+        var f = jaw[8];
+        
+        // .12 - .20
+        var height = Math.abs(((a.y - c.y + b.y - d.y) / 2) / (e.y - f.y));
+
+        return height - 0.16;
+    }
+    
+    function animate() {
+        if (faceLandmarks && faceLandmarks[0]) {
+            // 17 pts 
+            var jaw = faceLandmarks[0].getJawOutline();
+            var jawShape = getJawShape(jaw);
+
+            if (jawShape != currentFaceShape) {
+                currentFaceShape = jawShape;
+                scene.remove( mesh );
+                mesh = faceShape[currentFaceShape]
+                scene.add( mesh );
+            }
+            
+            var left = faceLandmarks[0].getLeftEye();
+            var right = faceLandmarks[0].getRightEye();
+            var eyeRatio = getEyeRatio(left, right, jaw);
+
+            if (eyeRatio != currentEyeShape) {
+                currentEyeShape = eyeRatio;
+                scene.remove( eyeMesh );
+                eyeMesh = eyeShape[currentEyeShape]
+                scene.add( eyeMesh );
+            }
+            
+            var leftEyebrow = faceLandmarks[0].getLeftEyeBrow();
+            var rightEyebrow = faceLandmarks[0].getRightEyeBrow();
+            var eyebrowHeight = getEyebrowHeight(left, right, leftEyebrow, rightEyebrow, jaw)
+            
+            eyebrowMesh.position.y += eyebrowHeight;
+            if (eyebrowMesh.position.y < -7) {
+                eyebrowMesh.position.y = -7;
+            } else if (eyebrowMesh.position.y > 5) {
+                eyebrowMesh.position.y = 5;
+            }
+        }
+        
+        requestAnimationFrame( animate );
+        // mesh.rotation.x += 0.005;
+        mesh.rotation.y += 0.01;
+        eyeMesh.rotation.y += 0.03;
+        eyebrowMesh.rotation.y -= 0.0075
+        renderer.render( scene, camera );
+
+        
+    }
+    
+    $(document).ready(function() {
+      //initFaceDetectionControls()
+      run();
+      
+      init();
+      animate();
+    })
+  </script>
+</body>
+</html>
