@@ -1,0 +1,323 @@
+<html>
+    <head>
+        <title>Capture your Face</title>
+        <style>canvas { width: 100%; height: 100% }</style>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <script src="libs/three.min.js"></script>
+        <script src="libs/clmtrackr.min.js" type="text/javascript"></script>
+        <script src="libs/model_pca_20_svm.js" type="text/javascript"></script>
+        <script src="libs/utils.js" type="text/javascript"></script>
+        <script src="libs/face_geometry.js" type="text/javascript"></script>
+
+        <script>
+            // getUserMedia only works over https in Chrome 47+, so we redirect to https. Also notify user if running from file.
+            if (window.location.protocol == "file:") {
+                alert("You seem to be running this example directly from a file. Note that these examples only work when served from a server or localhost due to canvas cross-domain restrictions.");
+            } else if (window.location.hostname !== "localhost" && window.location.protocol !== "https:"){
+                window.location.protocol = "https";
+            }
+        </script>
+
+
+        <div id="content">
+            <div id="container" class="nohide">
+                <video id="videoel" width="370" height="288" preload="auto" playsinline autoplay></video>
+                <canvas id="canvasel" width="370" height="288" class="hide"></canvas>
+                <canvas id="overlay" width="370" height="288"></canvas>
+            </div>
+            <div id="webglcontainer" class="hide">
+                <canvas id="webgl" width="306" height="342"></canvas>
+            </div>
+            <br/>
+            <div id="buttons">
+                <input class="btn" type="button" value="wait, loading video" disabled="disabled" onclick="startVideo()" id="startbutton"></input>
+            </div>
+
+
+            <p id="instructions"></p>
+                <div id="gum" class="nohide">
+                </div>
+                <div id="nogum" class="hide">
+                </div>
+            </div>
+
+
+            <script>
+                var vid = document.getElementById('videoel');
+                var vid_width = vid.width;
+                var vid_height = vid.height;
+                var overlay = document.getElementById('overlay');
+                var overlayCC = overlay.getContext('2d');
+                var gl;
+
+
+
+                /*********** Setup of video/webcam and checking for webGL support *********/
+
+                function enablestart() {
+                    var startbutton = document.getElementById('startbutton');
+                    startbutton.value = "start";
+                    startbutton.disabled = null;
+                }
+
+                var insertAltVideo = function(video) {
+                    // insert alternate video if getUserMedia not available
+                    if (supports_video()) {
+                        if (supports_webm_video()) {
+                            video.src = "./media/franck.webm";
+                        } else if (supports_h264_baseline_video()) {
+                            video.src = "./media/franck.mp4";
+                        } else {
+                            return false;
+                        }
+                        gl = getWebGLContext(document.getElementById('webgl'));
+                        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+                        return true;
+                    } else return false;
+                } 
+
+                var insertAltImage = function() {
+                    var canvas = document.getElementById('canvasel');
+                    var cc = canvas.getContext('2d');
+                    var img = new Image();
+                    img.onload = function() {
+                        cc.drawImage(img, 0, 0, vid_width, vid_height);
+                    };
+                    img.src = './media/franck_02221.jpg';
+                    vid.className = "hide";
+                    vid = canvas;
+                    canvas.className = "nohide";
+
+                    var startbutton = document.getElementById('startbutton');
+                    startbutton.onclick = function() {
+                        ctrack.start(vid);
+                        drawLoop();
+                    }
+                    startbutton.value = "start";
+                    startbutton.disabled = null;
+                } 
+
+                function adjustVideoProportions() {
+                    // resize overlay and video if proportions are not 4:3
+                    // keep same height, just change width
+                    var proportion = vid.videoWidth/vid.videoHeight;
+                    vid_width = Math.round(vid_height * proportion);
+                    vid.width = vid_width;
+                    overlay.width = vid_width;
+                }
+
+                // check whether browser supports webGL
+                var webGLContext;
+                var webGLTestCanvas = document.createElement('canvas');
+                if (window.WebGLRenderingContext) {
+                    webGLContext = webGLTestCanvas.getContext('webgl') || webGLTestCanvas.getContext('experimental-webgl');
+                    if (!webGLContext || !webGLContext.getExtension('OES_texture_float')) {
+                        webGLContext = null;
+                    }
+                }
+                if (webGLContext == null) {
+                    alert("Your browser does not seem to support WebGL. Unfortunately this face deformation example depends on WebGL, so you'll have to try it in another browser. :(");
+                }
+
+                function gumSuccess( stream ) {
+                    // add camera stream if getUserMedia succeeded
+                    if ("srcObject" in vid) {
+                        vid.srcObject = stream;
+                    } else {
+                        vid.src = (window.URL && window.URL.createObjectURL(stream));
+                    }
+                    vid.onloadedmetadata = function() {
+                        adjustVideoProportions();
+                        gl = getWebGLContext(document.getElementById('webgl'));
+                        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+                        vid.play();
+                    }
+                    vid.onresize = function() {
+                        adjustVideoProportions();
+                        gl = getWebGLContext(document.getElementById('webgl'));
+                        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+                        if (trackingStarted) {
+                            ctrack.stop();
+                            ctrack.reset();
+                            ctrack.start(vid);
+                        }
+                    }
+                }
+
+                function gumFail() {
+                    // fall back to video if getUserMedia failed
+                    insertAltVideo(vid);
+                    document.getElementById('gum').className = "hide";
+                    document.getElementById('nogum').className = "nohide";
+                    alert("There was some problem trying to fetch video from your webcam, using a static image instead.");
+                }
+
+                navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+                window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
+
+                // check for camerasupport
+                if (navigator.mediaDevices) {
+                    navigator.mediaDevices.getUserMedia({video : true}).then(gumSuccess).catch(gumFail);
+                } else if (navigator.getUserMedia) {
+                    navigator.getUserMedia({video : true}, gumSuccess, gumFail);
+                } else {
+                    insertAltImage();
+                    //insertAltVideo(vid);
+                    document.getElementById('gum').className = "hide";
+                    document.getElementById('nogum').className = "nohide";
+                    alert("Your browser does not seem to support getUserMedia, using a static image instead.");
+                }
+
+                vid.addEventListener('canplay', enablestart, false);
+
+                /*********** Code for face tracking *********/
+
+                var ctrack = new clm.tracker();
+                ctrack.init(pModel);
+                var trackingStarted = false;
+
+                function startVideo() {
+                    // start video
+                    vid.play();
+                    // start tracking
+                    ctrack.start(vid);
+                    trackingStarted = true;
+                    //start drawing faces
+                    drawLoop();
+                }
+
+                var positions;
+                var positions = ctrack.getCurrentPosition();
+
+                function drawLoop() {
+                    // track in video
+                    positions = ctrack.getCurrentPosition();
+                    overlayCC.clearRect(0, 0, vid_width, vid_height);
+                    if (positions) {
+                        ctrack.draw(overlay);
+                    }
+
+                    // hide buttons
+                    elem = document.getElementById('buttons');
+                    elem.setAttribute('class', 'hide');
+                    // show message
+                    var instructionel = document.getElementById('instructions');
+                    instructionel.innerHTML = "Please look at the webcam and keep your face still...";
+
+                    var pn = ctrack.getConvergence();
+                    if (pn < 1.8) {
+                        requestAnimFrame(drawFace);
+                        instructionel.innerHTML = "";
+                        if (vid.tagName == "VIDEO") {
+                            vid.pause();
+                        }
+                    } else {
+                        requestAnimFrame(drawLoop);
+                    }
+                }
+
+                var ph, gui;
+                var rotation = 0;
+                var scale = 3;
+                var xOffset = -10;
+                var yOffset = 0;
+
+
+
+                function drawFace() {
+                    // draw face deformation model
+                    positions = ctrack.getCurrentPosition();
+                    overlayCC.clearRect(0, 0, vid_width, vid_height);
+                    ctrack.draw(overlay);
+                    load(vid, positions, pModel);
+                    //draw(positions);
+
+                    // hide video
+                    var elem = document.getElementById('container');
+                    elem.setAttribute('class', 'hide');
+                    // show facial deformation element
+                    elem = document.getElementById('webglcontainer');
+                    elem.setAttribute('class', 'nohide');
+                    // hide message element
+                    document.getElementById('instructions').setAttribute('class', 'hide');
+
+                }
+
+
+                load = function(element, points, pModel, vertices) {
+                    pdmModel = pModel;
+                    if (vertices) {
+                        verticeMap = vertices;
+                    } else {
+                        verticeMap = pdmModel.path.vertices;
+                    }
+                    numTriangles = verticeMap.length;
+
+                    // get cropping
+                    maxx = 0;
+                    minx = element.width;
+                    maxy = 0;
+                    miny = element.height;
+                    for (var i = 0;i < points.length;i++) {
+                        if (points[i][0] > maxx) maxx = points[i][0];
+                        if (points[i][0] < minx) minx = points[i][0];
+                        if (points[i][1] > maxy) maxy = points[i][1];
+                        if (points[i][1] < miny) miny = points[i][1];
+                    }
+                    minx = Math.floor(minx);
+                    maxx = Math.ceil(maxx);
+                    miny = Math.floor(miny);
+                    maxy = Math.ceil(maxy);
+                    width = maxx-minx;
+                    height = maxy-miny;
+
+                    if (element.tagName == 'VIDEO' || element.tagName == 'IMG') {
+                        var ca = document.createElement('canvas');
+                        ca.width = element.width;
+                        ca.height = element.height;
+                        var cc = ca.getContext('2d');
+                        cc.drawImage(element, 0, 0, element.width, element.height);
+                    } else if (element.tagName == 'CANVAS') {
+                        var cc = element.getContext('2d');
+                    }
+                    var image = cc.getImageData(minx, miny, width, height);
+                    var tmpc = document.createElement("canvas");
+                    var tmpctx = tmpc.getContext("2d");
+                    tmpctx.putImageData(image, 0, 0);
+
+                    var renderer = new THREE.WebGLRenderer();
+                    renderer.setSize(window.innerWidth, window.innerHeight);
+                    document.body.appendChild(renderer.domElement);
+
+                    var texture = new THREE.DataTexture(tmpctx.canvas);
+                    texture.needsUpdate = true;
+                    texture.flipY = true;
+                    var material = new THREE.MeshBasicMaterial({map: texture, wireframe: true});
+
+                    var scene = new THREE.Scene();
+
+                    var group = new THREE.Object3D();
+                    scene.add(group)
+
+                    var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 1,10000);
+
+                    var geometry = new THREE.JSONLoader().parse(faceJson).geometry;
+
+                    var mesh = new THREE.Mesh(geometry, material);
+                    group.add(mesh);
+
+                    camera.position.z = 2;
+
+                    function render() {
+                        requestAnimationFrame(render);
+                        renderer.render(scene, camera);
+                    }
+                    render();
+
+                }
+            </script>
+        </div>
+    </body>
+</html>
