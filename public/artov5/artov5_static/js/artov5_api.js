@@ -44,7 +44,7 @@ artov5.config = {
   //  720p:  1280x720@30, not recommended.
   // 1080p: 1920x1080@30, not recommended.
 
-  camera_constraints: { width: 640, height: 480, frameRate: 30, facingMode: 'user', mirrored: true }
+  camera_constraints: { width: 1280, height: 720, frameRate: 30, facingMode: 'user', mirrored: true }
 }
 
 // ###### ARTOv5 Config ######
