@@ -1,20 +1,32 @@
 #facef-sdk-wrapper {
-  position: fixed;
-  margin:0px;
   z-index:-1;
+  min-width: 100%; width: auto;
+  min-height:100%; height:auto;
+  margin:0;
+  padding:0;
+  position:fixed;
+  object-fit: overlap;
+
   
 }
 #facef-sdk-video {
-  position: absolute;
-  left: 0;
-  top: 0;
+  min-width: 100%; width: auto;
+  min-height:100%; height:auto;
+  margin:0;
+  padding:0;
+  position:fixed;
+  object-fit: fill;
 }
 
 #facef-sdk-canvas {
-  position: relative;
-  left: 0;
-  top: 0;
-  z-index:1000000;
+  min-width: 100%; width: auto;
+  min-height:100%; height:auto;
+  margin:0;
+  padding:0;
+  position:fixed;
+  z-index:10000;
+  object-fit: fill;
+
 }
 
 #progress-bar[value] {
@@ -26,6 +38,7 @@
   width: 30%;
   height: 2em;
   -webkit-appearance: none;
+  
 }
 
 .red-button {
