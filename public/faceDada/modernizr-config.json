@@ -1,0 +1,10 @@
+{
+  "minify": false,
+  "options": [
+    "prefixed"
+  ],
+  "feature-detects": [
+    "test/webrtc/getusermedia",
+    "test/workers/webworkers"
+  ]
+}

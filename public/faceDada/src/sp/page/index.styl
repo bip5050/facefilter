@@ -1,0 +1,352 @@
+_MEDIA_SP()
+  @media screen and (max-width: 639px)
+    {block}
+
+_MEDIA_PC()
+  @media screen and (min-width: 640px)
+    {block}
+
+//----------------------
+// 0. Default settings
+//----------------------
+
+*
+  box-sizing border-box
+
+html, body, ul, h2, h3, hr, p
+  padding 0
+  margin 0
+  -webkit-margin-before 0.0em
+  -webkit-margin-after 0.0em
+
+body
+  font-family "EB Garamond", Garamond, YuMincho, "游明朝", "Hiragino Mincho ProN", "Roboto Slab", serif
+  font-size 11px
+  letter-spacing 0.18em
+  line-height 2.27
+  color rgba(255, 255, 255, 0.7)
+  background-color #0a1a26
+
+button
+  background none
+  border none
+  outline none
+  opacity 0.7
+  transition opacity 0.5s
+  &:hover
+    opacity 1.0
+
+p
+  letter-spacing 0.2em
+
+a
+  color rgb(255, 255, 255)
+  text-decoration none
+  opacity 0.7
+  transition opacity 1.0s
+  &:hover
+    opacity 1.0
+  &.blank
+    background url(images/icon_blank.png) no-repeat right center
+    background-size 10px 8px
+    padding 0 14px 0 0
+
+
+h2
+  font-size 17px
+  font-weight normal
+  letter-spacing 0.2em
+  line-height 2
+h3
+  font-size 15px
+  font-weight normal
+  letter-spacing 0.2em
+  line-height 1
+.s9
+  font-size 9px
+.s12
+  font-size 12px
+.s14
+  font-size 14px
+.s19
+  font-size 19px
+
+.m-top40
+  margin-top 40px
+.m-bottom40
+  margin-bottom 40px
+.m-top30
+  margin-top 30px
+.m-bottom30
+  margin-bottom 30px
+
+hr
+  border 0
+  height 2px
+  background url(images/h-line.png) repeat-x 0 0
+  background-size 100% 2px
+  margin 40px 0
+  opacity 0.7
+  +_MEDIA_SP()
+    height 1px
+    background-size 100% 1px
+  &.mini
+    width 15px
+    //height 1px
+    background-size 100% 1px
+    text-align left
+    margin-left 0
+    opacity 1.0
+
+
++_MEDIA_PC()
+  body
+    font-size 11px*2
+  h2
+    font-size 17px*2
+  h3
+    font-size 15px*2
+  .s9
+    font-size 9px*2
+  .s12
+    font-size 12px*2
+  .s14
+    font-size 14px*2
+  .s19
+    font-size 19px*2
+  .m-top40
+    margin-top 40px*2
+  .m-bottom40
+    margin-bottom 40px*2
+  .m-top30
+    margin-top 30px*2
+  .m-bottom30
+    margin-bottom 30px*2
+  a.blank
+    background-size 20px 16px
+    padding 0 32px 0 0
+  hr
+    margin 80px 0
+  hr.mini
+    width 30px
+
+
+//----------------------
+// 1. Common parts
+//----------------------
+
+.mobile_only
+  display none
+
+html.mobile
+  .mobile_only
+    display block
+
+//----------------------
+// 2. Elements
+//----------------------
+
+#youtube_container
+  position relative
+  width 100%
+  max-width 640px
+  z-index 10002
+  +_MEDIA_PC()
+    margin 60px auto 0 auto
+
+#youtube
+  position absolute
+  width 100%
+
+#youtube_overlay
+  width 100%
+  display flex
+  align-items center
+  justify-content center
+  margin 30px auto 0 auto
+  pointer-events none
+  img
+    position relative
+    width 100%
+    top 0
+    left 0
+  button
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%,-50%)
+    +_MEDIA_SP()
+      img
+        width 61px
+        height  61px
+
+#page
+  position relative
+  max-width 640px
+  margin 0 auto
+.content
+  position relative
+  margin 0 30px
+  +_MEDIA_PC()
+    margin 0 30px*2
+
+  h2
+    margin-top (56/2)px
+  +_MEDIA_PC()
+    margin-top 56px
+
+  .support_description
+    margin-top 12px
+    +_MEDIA_PC()
+      margin-top 24px
+
+.environment
+  margin-top 22px
+  margin-bottom -9px
+  img
+    width 100%
+  +_MEDIA_PC()
+    margin-top 44px
+    margin-bottom -18px
+
+.concept
+  line-height 1
+  img
+    width 100%
+  p
+    white-space
+      nowarap
+.album
+  position relative
+  line-height 1
+  img
+    width 100%
+  h3
+    white-space nowrap
+  ul
+    display flex
+    align-items center
+    justify-content space-between
+    padding 0
+    list-style-type none
+    letter-spacing 0.1em
+
+.kamra
+  position relative
+  width 100%
+  .col2
+    display flex
+  #profile_kamra
+    position relative
+    background url(images/profile-kamra.jpg) no-repeat
+    width 130px
+    height 130px
+    background-size 130px 130px
+    +_MEDIA_PC()
+      width 260px
+      height 260px
+      background-size 260px 260px
+  .info
+    position absolute
+    margin 0 0 0 40px
+    letter-spacing 0.2em
+    +_MEDIA_SP()
+      margin 0 0 0 20px
+      img
+        width 98px
+  p
+    margin-bottom -6px
+    +_MEDIA_PC()
+      margin-bottom -12px
+  .social
+    margin-top 20px
+    +_MEDIA_SP()
+      margin-top 10px
+
+
+.invisi
+  margin-bottom -4px
+  +_MEDIA_PC()
+    margin-bottom -8px
+  a
+    line-height 1
+  p
+    margin-top 21px
+    margin-bottom 14px
+  +_MEDIA_PC()
+    p
+      margin-top 42px
+      margin-bottom 28px
+
+
+section.credits
+  .col2
+    display flex
+    flex-wrap wrap
+    align-items stretch
+    justify-content space-between
+  // only sp?
+  .credit
+    width 120px
+    letter-spacing 0.1em
+    +_MEDIA_PC()
+      width 240px
+  .part
+    line-height 1.1
+
+.share
+  position relative
+  width 100%
+  background-color #0c212f
+
+  .buttons
+    max-width 580px
+    display flex
+    align-items center
+    justify-content center
+    margin 0 auto
+    padding 80px 0
+    a
+      margin 0 30px
+    +_MEDIA_SP()
+      margin 0 auto
+      padding 40px 0
+      a
+        margin 0 15px
+      img
+        width 50px
+
+.footer
+  display flex
+  flex-direction column
+  align-items center
+  justify-content space-around
+  padding 100px 0
+  background-color #0f2432
+  +_MEDIA_SP()
+    padding 50px 0
+    img
+      width 50%
+  .copylight
+    width 170px
+    height 16px
+    margin-top 30px
+    +_MEDIA_SP()
+      width 85px
+      height 8px
+      margin-top 15px
+
+
+.overlay
+  position fixed
+  left 0
+  top 0
+  width 100%
+  height 100%
+  z-index 10000
+  pointer-events none
+
+.noise
+  background url(/images/noise.png)
+  z-index 10001
+  opacity 0.6
