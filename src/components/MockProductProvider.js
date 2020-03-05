@@ -12,9 +12,9 @@ function MakeProduct(...vars){
 
 const ProductList = [
     MakeProduct(ProductCategories.EYEWEAR, 'Navigator', 'products/eyewear/navigator/preview.jpg', 
-        ProductData([0,0,0], [0,0,0,0], [1,1,1], 'products/eyewear/navigator/model.obj', 'products/eyewear/navigator/texture.jpg',1,'products/eyewear/navigator/texture.jpg',.2)),
+        ProductData([0,0,0], [0,0,0,0], [1,1,1], 'products/eyewear/navigator/model.obj', 'products/eyewear/navigator/texture.jpg',1,'products/eyewear/navigator/texture.jpg',.1)),
     MakeProduct(ProductCategories.EYEWEAR, 'Lovely', 'products/eyewear/lovely/preview.jpg', 
-        ProductData([0,0,0], [0,0,0,0], [1,1,1], 'products/eyewear/lovely/model.obj', 'products/eyewear/lovely/texture.jpg',1, 'products/eyewear/lovely/texture.jpg', .2)),
+        ProductData([0,0,0], [0,0,0,0], [1,1,1], 'products/eyewear/lovely/model.obj', 'products/eyewear/lovely/texture.jpg',1, 'products/eyewear/lovely/texture.jpg', .1)),
     MakeProduct(ProductCategories.LIPSTICK, 'Charm', 'products/lipstick/charm/preview.jpg', 
         ProductData([0,0,0], [0,0,0,0], [1,1,1], 'products/lipstick/charm/model.obj', 'products/lipstick/charm/texture.png',.3, null, 1)),
     MakeProduct(ProductCategories.LIPSTICK, 'Glam', 'products/lipstick/glam/preview.jpg', 

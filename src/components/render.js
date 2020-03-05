@@ -206,9 +206,9 @@ export function addProduct(product) {
 
 var environmentMap = 'products/envmap.jpg';
 
-    var material = new THREE.MeshStandardMaterial({ map: tex, transparent: true, opacity: product.data.opacity, metalness: .3,
-        roughness: .6,
-        envMapIntensity: 1.0});
+    var material = new THREE.MeshStandardMaterial({ map: tex, transparent: true, opacity: product.data.opacity, metalness: .5,
+        roughness: .5,
+        envMapIntensity: 0});
 
     var material2 = null;
     if(product.data.textureUrl2 != null){
@@ -228,9 +228,9 @@ var environmentMap = 'products/envmap.jpg';
 
     if (product.category == "Lipstick") {
         faceMask.material = material;
+
     }
 
-    faceMask.material.transparent = true;
 
 
 }
