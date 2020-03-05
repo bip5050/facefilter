@@ -1,44 +1,60 @@
 #facef-sdk-wrapper {
-  z-index:-1;
-  min-width: 100%; width: auto;
-  min-height:100%; height:auto;
-  margin:0;
-  padding:0;
-  position:fixed;
-  object-fit: overlap;
-
-  
-}
-#facef-sdk-video {
-  min-width: 100%; width: auto;
-  min-height:100%; height:auto;
-  margin:0;
-  padding:0;
-  position:fixed;
-  object-fit: fill;
+  z-index: -1;
+  min-width: 100%;
+  width: auto;
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: fixed;
 }
 
-#facef-sdk-canvas {
-  min-width: 100%; width: auto;
-  min-height:100%; height:auto;
-  margin:0;
-  padding:0;
-  position:fixed;
-  z-index:10000;
-  object-fit: fill;
+.cameraButton {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  bottom: 0;
+  margin: auto;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.459);
+  border-radius: 55px;
+}
 
+.cameraButton img {
+  width: 100%;
+  opacity: .5;
+  padding: 20px;
+}
+
+#facef-video {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  object-fit: cover;
+
+}
+
+#facef-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  object-fit: cover;
 }
 
 #progress-bar[value] {
-  position:fixed;
-  margin-left:35%;
-  margin-right:35%;
-  margin-top:40%;
-  text-align:center;
+  position: fixed;
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 40%;
+  text-align: center;
   width: 30%;
   height: 2em;
   -webkit-appearance: none;
-  
 }
 
 .red-button {
@@ -53,6 +69,6 @@
   background: green;
 }
 
-.videosource{
+.videosource {
   display: none;
 }

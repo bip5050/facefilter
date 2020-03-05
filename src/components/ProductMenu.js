@@ -17,11 +17,11 @@ export default class ProductMenu extends Component {
             }
         })
     }
-render (){
-    
-    return(
-        <div className = "productMenu" >
-            { this.productDisplayList() }
+    render() {
+
+        return (
+            <div className="productMenu" >
+                {this.productDisplayList()}
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CameraButton = ({ image, onPhoto }) => {
+export const CameraButton = ({ image, onPhoto }) => {
 
     return (
         <div onClick={onPhoto} className="cameraButton">
@@ -9,4 +9,3 @@ const CameraButton = ({ image, onPhoto }) => {
     )
 }
 
-export default CameraButton

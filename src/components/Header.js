@@ -4,17 +4,17 @@ import '../style/Header.style.css';
 import { ProductCategories } from './Products'
 
 
-const Header = ({currentProductCategory, onCategorySelected}) => {
+const Header = ({ currentProductCategory, onCategorySelected }) => {
 
 
-        return (
-            <nav className="menu">
-                <h1 className="logo">aura</h1>
-                <div className="right">
+    return (
+        <nav className="menu">
+            <h1 className="logo">aura</h1>
+            <div className="right">
                 <Dropdown className="Dropdown" options={Object.values(ProductCategories)} onChange={onCategorySelected} value={currentProductCategory} placeholder={ProductCategories.EYEWEAR} />
-                </div>
-            </nav>
-        )
-    }
+            </div>
+        </nav>
+    )
+}
 
 export default Header
