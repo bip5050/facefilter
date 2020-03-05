@@ -1,16 +1,3 @@
-.closeWindow {
-  margin: 1%;
-  color: #0075bf;
-  background-color: none;
-  background: none;
-  box-shadow: none;
-  border: 0;
-  font-size: 2em;
-}
-
-.closeWindow:hover {
-  color: #005488;
-  box-shadow: none;
-  border: 0;
-  font-size: 2em;
+.cameraButton {
+  margin-bottom:50px;
 }

@@ -29,6 +29,12 @@ export default class App extends Component {
     console.log("App init happens here");
   }
 
+  openSharingModal = (e) => {
+    this.setState ({
+     displaySharingModal: true
+    })
+  }
+
   closeSharingModal = (e) => {
     e.preventDefault()
     this.setState({ displaySharingModal: false })
@@ -44,22 +50,20 @@ export default class App extends Component {
     this.setState({ currentProductCategory: e.value });
   }
 
+  takePhoto = (e) => {
+    var canvas = document.getElementById('facef-canvas');
+    var dataURL = canvas.toDataURL('image/jpg');
+    var link = document.createElement('a');
+    link.download = 'snap.jpg';
+    link.href = dataURL;
+    link.click();
+    this.openSharingModal (e);
+  }
 
 
 
 
   render() {
-
-    function TakeSnap() {
-      var canvas = document.getElementById('facef-canvas');
-      var dataURL = canvas.toDataURL('image/jpg');
-      var link = document.createElement('a');
-      link.download = 'snap.jpg';
-      link.href = dataURL;
-      link.click();
-    }
-
-
     return (
       <div className="App">
         <CameraPermissionOverlay display={this.state.displayOverlay} onClose={this.initApp} />
@@ -67,7 +71,7 @@ export default class App extends Component {
         <ProductMenu productCategory={this.state.currentProductCategory} products={this.state.products} currentProduct={this.state.currentProduct} onProductSelected={this.onProductSelected} />
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
         <FaceFilter />
-        <CameraButton onPhoto={TakeSnap} image={this.camImage} />
+        <CameraButton onPhoto={this.takePhoto} image={this.camImage} />
         <SharingModal showModal={this.state.displaySharingModal} onClose={this.closeSharingModal} />
       </div>
 

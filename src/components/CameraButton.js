@@ -1,4 +1,5 @@
 import React from 'react'
+import '../style/CameraButton.style.css';
 
 export const CameraButton = ({ image, onPhoto }) => {
 

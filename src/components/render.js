@@ -22,11 +22,6 @@ let videoSprite;
 
 let faceMask;
 let faceMaterial;
-var cube;
-
-
-
-
 
 export function initThreejs(fovy, video, videoCanvas) {
 
@@ -39,11 +34,12 @@ export function initThreejs(fovy, video, videoCanvas) {
     renderer = new THREE.WebGLRenderer({
         canvas: canvas,
         alpha: true,
-        preserveDrawingBuffer: true
+        preserveDrawingBuffer: true,
+        antialias: true
     });
 
     // renderer.setSize(defaultWidth, defaultHeight);
-    renderer.setClearColor(0x000000, 1);
+    renderer.setClearColor("#e5e5e5");
     renderer.autoClear = false;
 
 
@@ -69,16 +65,13 @@ export function initThreejs(fovy, video, videoCanvas) {
 
     var geometry = new THREE.BoxGeometry(1, 1, 1);
     var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    cube = new THREE.Mesh(geometry, material);
 
-    // scene3D.add(cube);
 
 
 
     var animate = function () {
         requestAnimationFrame(animate);
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
+        console.log("This is our render loop")
     };
     animate();
 
@@ -132,7 +125,8 @@ export function DisableTryOn() {
 
 
 // TO ADD ANY ADDITIONAL PRODCUCT
-function addObj(url, mat, rtnObj) {
+
+function addObj(url, mat, mat2, rtnObj) {
     var piv_scale = 1;
     var pivot_pose = [0, 0, 0, 0, 0, 0];
     // -- Load obj_fn and add it
@@ -141,26 +135,26 @@ function addObj(url, mat, rtnObj) {
 
 
     objLoader.load(url, (object_root) => {
-
-
-        //cube = object_root;
+        console.log(object_root.children[0])
         object_root.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-                child.material = mat;
+                if(child.name.includes("mesh2")) {
+                    child.material = mat2;
+                    console.log("added a second material")
 
+                }
+                else {
+                    child.material = mat;
+                }
             }
         });
-
 
         scene3D.add(object_root);
         object_root.scale.x = piv_scale;
         object_root.scale.y = piv_scale;
         object_root.scale.z = piv_scale;
-        // object_root.visible = false;
         objects.push(object_root);
         objects_pivot_poses.push(pivot_pose);
-        //obj.translateZ(0.15);
-
 
         rtnObj(object_root);
 
@@ -196,7 +190,7 @@ export function createFaceGeometry(xzimgMagicFace) {
     MaskMat.colorWrite = false;
 
 
-    addObj('facef/mask.obj', MaskMat, rtnObj => {
+    addObj('facef/mask.obj', MaskMat, null, rtnObj => {
 
     });
 
@@ -209,10 +203,25 @@ export function addProduct(product) {
     if (currentObj)
         scene3D.remove(currentObj);
     var tex = new THREE.TextureLoader().load(product.data.textureUrl);
-    var material = new THREE.MeshStandardMaterial({ map: tex, transparent: true, opacity: product.data.opacity })
+
+var environmentMap = 'products/envmap.jpg';
+
+    var material = new THREE.MeshStandardMaterial({ map: tex, transparent: true, opacity: product.data.opacity, metalness: .3,
+        roughness: .6,
+        envMapIntensity: 1.0});
+
+    var material2 = null;
+    if(product.data.textureUrl2 != null){
+        var tex2 = new THREE.TextureLoader().load(product.data.textureUrl2);
+        material2 = new THREE.MeshStandardMaterial({ map: tex2, transparent: true, opacity: product.data.opacity2, metalness: .8,
+            roughness: 0,
+            envMapIntensity: 1.0 })
+        console.log("Constructed material2 with opacity " + product.data.opacity2)
+    }
+    
 
     if (product.category === "Eyewear") {
-        addObj(product.data.modelUrl, material, rtnObj => {
+        addObj(product.data.modelUrl, material, material2, rtnObj => {
         });
         faceMask.material.opacity = 0;
     }
@@ -220,6 +229,8 @@ export function addProduct(product) {
     if (product.category == "Lipstick") {
         faceMask.material = material;
     }
+
+    faceMask.material.transparent = true;
 
 
 }

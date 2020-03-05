@@ -15,7 +15,7 @@ const SharingModal = ({showModal, onClose}) => {
     return (
       <div className="sharingModal">
         
-        <div classname="header">
+        <div className="header">
           <h1>You look amazing!</h1>
           </div>
 
@@ -24,11 +24,11 @@ const SharingModal = ({showModal, onClose}) => {
           <div className="photo" />
         </div>
 
-        <div classname="shareMessagingWrapper">
+        <div className="shareMessagingWrapper">
           <span className="shareMessaging">Share this look with your friends!</span>
           </div>
 
-          <div classname="shareButtons">
+          <div className="shareButtons">
             Buttons go here.
           </div>
 
