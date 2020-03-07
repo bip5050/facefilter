@@ -61,7 +61,7 @@ export const FaceFilter = () => {
 
         function onLoadCompleted() {
 
-            $('.loadingscreen').fadeOut();
+            $('.loadingScreen').fadeOut();
 
             setInterval(() => {
                 facef.initialize();
@@ -149,10 +149,8 @@ export const FaceFilter = () => {
     return (
         <div className="row arcomp">
 
-            <div className="loadingscreen">
-
-                <h6 className="light center-align loadingText">loading please wait...</h6>
-
+            <div className="loadingScreen">
+                <p>fetching...</p>
             </div>
             <div className="face-filter">
                 <video id="facef-video" playsInline autoPlay></video>

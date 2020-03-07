@@ -138,7 +138,7 @@ function addObj(url, mat, mat2, rtnObj) {
         console.log(object_root.children[0])
         object_root.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
-                if(child.name.includes("mesh2")) {
+                if (child.name.includes("mesh2")) {
                     child.material = mat2;
                     console.log("added a second material")
 
@@ -197,37 +197,60 @@ export function createFaceGeometry(xzimgMagicFace) {
 
 }
 
+// this is to avoid load dupliate models
+var loading = false;
 
 export function addProduct(product) {
+
+    if (loading) return;
+    loading = true;
+
+    $('.loadingScreen').fadeIn();
 
     if (currentObj)
         scene3D.remove(currentObj);
     var tex = new THREE.TextureLoader().load(product.data.textureUrl);
 
-var environmentMap = 'products/envmap.jpg';
+    var environmentMap = new THREE.TextureLoader().load('products/envmap.jpg');
 
-    var material = new THREE.MeshStandardMaterial({ map: tex, transparent: true, opacity: product.data.opacity, metalness: .5,
+    environmentMap.mapping = THREE.EquirectangularReflectionMapping;
+
+    var material = new THREE.MeshPhysicalMaterial({
+        map: tex, transparent: true, opacity: product.data.opacity, metalness: .5,
         roughness: .5,
-        envMapIntensity: 0});
+        envMapIntensity: 0,
+        envMap: environmentMap,
+        reflectivity: 1
+    });
 
     var material2 = null;
-    if(product.data.textureUrl2 != null){
+    if (product.data.textureUrl2 != null) {
         var tex2 = new THREE.TextureLoader().load(product.data.textureUrl2);
-        material2 = new THREE.MeshStandardMaterial({ map: tex2, transparent: true, opacity: product.data.opacity2, metalness: .8,
+        material2 = new THREE.MeshPhysicalMaterial({
+            map: tex2, transparent: true, opacity: product.data.opacity2, metalness: .8,
             roughness: 0,
-            envMapIntensity: 1.0 })
+            envMapIntensity: 1.0,
+            envMap: environmentMap,
+            reflectivity: 1
+
+        })
         console.log("Constructed material2 with opacity " + product.data.opacity2)
     }
-    
+
 
     if (product.category === "Eyewear") {
         addObj(product.data.modelUrl, material, material2, rtnObj => {
+            $('.loadingScreen').fadeOut();
+            loading = false;
+
         });
         faceMask.material.opacity = 0;
     }
 
     if (product.category == "Lipstick") {
         faceMask.material = material;
+        $('.loadingScreen').fadeOut();
+        loading = false;
 
     }
 
