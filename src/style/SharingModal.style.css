@@ -9,6 +9,7 @@
   top: 0px;
   z-index: 10000;
   text-align: center;
+  overflow: scroll;
 }
 
 .sharingModal .closeSharingModal {
@@ -18,4 +19,45 @@
   box-shadow: none;
   border: 0;
   font-size: 2em;
+}
+
+.shareForm .group {
+  padding: 6px;
+}
+
+.shareForm .group input {
+  margin: 0 4px;
+}
+
+.sharingModal .closeSharingModal:hover {
+  cursor: pointer;
+}
+
+li.button-share img {
+  width: 40px;
+  height: 40px;
+}
+
+.shareButtons ul {
+  padding-inline-start: 0;
+}
+
+.shareButtons li {
+  display: inline;
+  padding: 0px 4px;
+}
+
+.shareButtons li:hover {
+  cursor: pointer;
+}
+
+.photoWrapper .photo {
+  display: inline-block;
+  height: auto;
+  margin: 0 44px;
+  border: rgb(143, 143, 143) solid 1px;
+}
+
+.photoWrapper .photo img {
+  width: 100%;
 }

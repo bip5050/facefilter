@@ -17,7 +17,8 @@ export default class App extends Component {
     displaySharingModal: false,
     currentProductCategory: ProductCategories.EYEWEAR,
     currentProduct: 0,
-    products: ProductList
+    products: ProductList,
+    SnapUrl: ''
   }
 
   camImage = 'img/camera.png'
@@ -30,8 +31,8 @@ export default class App extends Component {
   }
 
   openSharingModal = (e) => {
-    this.setState ({
-     displaySharingModal: true
+    this.setState({
+      displaySharingModal: true
     })
   }
 
@@ -53,15 +54,18 @@ export default class App extends Component {
   takePhoto = (e) => {
     var canvas = document.getElementById('facef-canvas');
     var dataURL = canvas.toDataURL('image/jpg');
-    var link = document.createElement('a');
-    link.download = 'snap.jpg';
-    link.href = dataURL;
-    link.click();
-    this.openSharingModal (e);
+
+    //SAVE IMAGE TEMPORARY TO SERVER AND GET BACK URL TO SHARE IN SOCIAL PLATFORM
+
+// var x = this;
+//     storageRef.putString(dataURL, 'base64').then(function (snapshot) {
+//       console.log('Uploaded a base64 string!');
+//       x.setState({SnapUrl:snapshot});
+//     });
+
+    this.setState({ SnapUrl: dataURL });
+    this.openSharingModal(e);
   }
-
-
-
 
   render() {
     return (
@@ -72,7 +76,7 @@ export default class App extends Component {
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
         <FaceFilter />
         <CameraButton onPhoto={this.takePhoto} image={this.camImage} />
-        <SharingModal showModal={this.state.displaySharingModal} onClose={this.closeSharingModal} />
+        <SharingModal showModal={this.state.displaySharingModal} SnapUrl={this.state.SnapUrl} onClose={this.closeSharingModal} />
       </div>
 
     );

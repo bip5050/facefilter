@@ -18,6 +18,8 @@ export const FaceFilter = () => {
 
     useEffect(() => {
 
+       
+     
         // INITIALIZING AR LIBRARY
         const video = document.getElementById('facef-video');
 
@@ -41,12 +43,14 @@ export const FaceFilter = () => {
             // -- Initialize Video capture
             window.addEventListener('orientationchange', () => {
                 updateSize(video, videoCanvas);
+
             });
 
             // Start front facing camera if possible
             navigator.mediaDevices
                 .getUserMedia({
                     audio: false,
+
                     video: { facingMode: 'face' },
                 })
                 .then(stream => {
@@ -61,7 +65,7 @@ export const FaceFilter = () => {
 
         function onLoadCompleted() {
 
-            $('.loadingScreen').fadeOut();
+            $('.loadingscreen').fadeOut();
 
             setInterval(() => {
                 facef.initialize();
@@ -72,6 +76,7 @@ export const FaceFilter = () => {
 
         function onVideoCanPlay() {
             videoReady = true;
+
             updateSize(video, videoCanvas);
         }
 
@@ -148,8 +153,7 @@ export const FaceFilter = () => {
 
     return (
         <div className="row arcomp">
-
-            <div className="loadingScreen">
+            <div className="loadingscreen">
                 <p>fetching...</p>
             </div>
             <div className="face-filter">

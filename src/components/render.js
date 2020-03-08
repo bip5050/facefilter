@@ -1,8 +1,7 @@
 
 import * as THREE from 'three';
 import { OBJLoader } from './OBJLoader';
-
-
+import { getAllByAltText } from '@testing-library/react';
 
 const $ = window.$;
 
@@ -38,7 +37,6 @@ export function initThreejs(fovy, video, videoCanvas) {
         antialias: true
     });
 
-    // renderer.setSize(defaultWidth, defaultHeight);
     renderer.setClearColor("#e5e5e5");
     renderer.autoClear = false;
 
@@ -126,7 +124,7 @@ export function DisableTryOn() {
 
 // TO ADD ANY ADDITIONAL PRODCUCT
 
-function addObj(url, mat, mat2, rtnObj) {
+function addObj(url, matArray, rtnObj) {
     var piv_scale = 1;
     var pivot_pose = [0, 0, 0, 0, 0, 0];
     // -- Load obj_fn and add it
@@ -135,19 +133,8 @@ function addObj(url, mat, mat2, rtnObj) {
 
 
     objLoader.load(url, (object_root) => {
-        console.log(object_root.children[0])
-        object_root.traverse(function (child) {
-            if (child instanceof THREE.Mesh) {
-                if (child.name.includes("mesh2")) {
-                    child.material = mat2;
-                    console.log("added a second material")
 
-                }
-                else {
-                    child.material = mat;
-                }
-            }
-        });
+        object_root.children[0].material = matArray;
 
         scene3D.add(object_root);
         object_root.scale.x = piv_scale;
@@ -158,7 +145,7 @@ function addObj(url, mat, mat2, rtnObj) {
 
         rtnObj(object_root);
 
-        currentObj = object_root;
+
     });
 
 
@@ -166,9 +153,8 @@ function addObj(url, mat, mat2, rtnObj) {
 }
 
 
-
+var realMask;
 // CREATES REFERENCE FACE MESH
-
 export function createFaceGeometry(xzimgMagicFace) {
     // Create face mesh
     const faceGeometry = new THREE.BufferGeometry();
@@ -183,16 +169,17 @@ export function createFaceGeometry(xzimgMagicFace) {
 
     faceMask = new THREE.Mesh(faceGeometry, faceMaterial);
 
-
     scene3D.add(faceMask);
 
     var MaskMat = new THREE.MeshBasicMaterial();
     MaskMat.colorWrite = false;
 
 
-    addObj('facef/mask.obj', MaskMat, null, rtnObj => {
+    addObj('facef/mask.obj', MaskMat, rtnObj => {
+        realMask = rtnObj;
 
     });
+
 
 
 }
@@ -205,54 +192,63 @@ export function addProduct(product) {
     if (loading) return;
     loading = true;
 
-    $('.loadingScreen').fadeIn();
+    $('.loadingscreen').fadeIn();
 
     if (currentObj)
         scene3D.remove(currentObj);
-    var tex = new THREE.TextureLoader().load(product.data.textureUrl);
 
-    var environmentMap = new THREE.TextureLoader().load('products/envmap.jpg');
 
-    environmentMap.mapping = THREE.EquirectangularReflectionMapping;
+    var matArray = [];
+    var texLoader = new THREE.TextureLoader();
 
-    var material = new THREE.MeshPhysicalMaterial({
-        map: tex, transparent: true, opacity: product.data.opacity, metalness: .5,
-        roughness: .5,
-        envMapIntensity: 0,
-        envMap: environmentMap,
-        reflectivity: 1
+    product.data.materials.forEach(mat => {
+
+        var map = mat.maps[0] ? texLoader.load(mat.maps[0]) : null;
+        var normalMap = mat.normalMap ? texLoader.load(mat.normalMap) : null;
+        var opacity = mat.opacity;
+        var envMap = mat.envMap ? texLoader.load(mat.envMap) : null;
+        if (envMap) envMap.mapping = THREE.EquirectangularReflectionMapping;
+
+
+        var mat = new THREE.MeshStandardMaterial(
+            { map: map, normalMap: normalMap, opacity: opacity, envMap: envMap, roughness: mat.roughness, metalness: mat.metalness, transparent: mat.transparent }
+        );
+        matArray.push(mat);
+
     });
 
-    var material2 = null;
-    if (product.data.textureUrl2 != null) {
-        var tex2 = new THREE.TextureLoader().load(product.data.textureUrl2);
-        material2 = new THREE.MeshPhysicalMaterial({
-            map: tex2, transparent: true, opacity: product.data.opacity2, metalness: .8,
-            roughness: 0,
-            envMapIntensity: 1.0,
-            envMap: environmentMap,
-            reflectivity: 1
-
-        })
-        console.log("Constructed material2 with opacity " + product.data.opacity2)
-    }
-
-
-    if (product.category === "Eyewear") {
-        addObj(product.data.modelUrl, material, material2, rtnObj => {
-            $('.loadingScreen').fadeOut();
+    if (product.category === "Eyewear" || product.category === "HeadSet") {
+        realMask.visible = true;
+        addObj(product.data.modelUrl, matArray, rtnObj => {
+            $('.loadingscreen').fadeOut();
+            currentObj = rtnObj;
             loading = false;
+
+            // var json = rtnObj.children[0].geometry.toJSON();
+
+            // var jsonobject = JSON.stringify(json);
+
+            // var byteArray = [];
+
+            // for (var i = 0; i < jsonobject.length; i++) {
+            //     byteArray.push(jsonobject.charCodeAt(i));
+            // }
+
+            // console.error(byteArray);
+
 
         });
         faceMask.material.opacity = 0;
     }
 
-    if (product.category == "Lipstick") {
-        faceMask.material = material;
-        $('.loadingScreen').fadeOut();
+    if (product.category === "Lipstick" || product.category === "Eyebrows" || product.category === "Mascara") {
+        realMask.visible = false;
+        faceMask.material = matArray[0];
+        $('.loadingscreen').fadeOut();
         loading = false;
 
     }
+
 
 
 
@@ -271,12 +267,16 @@ export function updateSize(video, videoCanvas) {
         camera3D.aspect = video.videoWidth / video.videoHeight;
         camera3D.updateProjectionMatrix();
 
-        renderer.setSize(video.videoWidth, video.videoHeight);
+
 
         // Update video canvas size
         videoCanvas.width = video.videoWidth;
         videoCanvas.height = video.videoHeight;
 
+        if (video.videoWidth < 641)
+            renderer.setSize(video.videoWidth * 2, video.videoHeight * 2);
+        else
+            renderer.setSize(video.videoWidth, video.videoHeight);
 
         videoSprite.scale.set(
             mirror ? -video.videoWidth : video.videoWidth,

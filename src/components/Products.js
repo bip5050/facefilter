@@ -1,13 +1,17 @@
+
 const Struct = (...keys) => ((...v) => keys.reduce((o, k, i) => { o[k] = v[i]; return o }, {}))
 
 const ProductCategories = {
     EYEWEAR: 'Eyewear',
-    LIPSTICK: 'Lipstick'
+    LIPSTICK: 'Lipstick',
+    HEADSET:'HeadSet',
+    MASCARA:'Mascara',
+    EYEBROW:'Eyebrows'
 }
 
-const Product = Struct('id', 'category', 'name', 'previewImageUrl', 'data');
-const ProductData = Struct('position', 'rotation', 'scale', 'modelUrl', 'textureUrl','opacity','textureUrl2','opacity2');
 
+const Product = Struct('id', 'category', 'name', 'previewImageUrl', 'data');
+const ProductData = Struct('position', 'rotation', 'scale', 'modelUrl', 'materials');
 
 
 module.exports = {
