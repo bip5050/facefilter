@@ -1,7 +1,6 @@
 
 import * as THREE from 'three';
 import { OBJLoader } from './OBJLoader';
-import { getAllByAltText } from '@testing-library/react';
 
 const $ = window.$;
 
@@ -61,8 +60,8 @@ export function initThreejs(fovy, video, videoCanvas) {
     camera3D.position.set(0, 0, 0);
     scene3D.add(camera3D);
 
-    var geometry = new THREE.BoxGeometry(1, 1, 1);
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+//    var geometry = new THREE.BoxGeometry(1, 1, 1);
+//    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
 
 
@@ -155,12 +154,12 @@ function addObj(url, matArray, rtnObj) {
 
 var realMask;
 // CREATES REFERENCE FACE MESH
-export function createFaceGeometry(xzimgMagicFace) {
+export function createFaceGeometry(facefMagicFace) {
     // Create face mesh
     const faceGeometry = new THREE.BufferGeometry();
-    faceGeometry.setAttribute('position', new THREE.BufferAttribute(xzimgMagicFace.faceModelObj.vertices, 3));
-    faceGeometry.setAttribute('uv', new THREE.BufferAttribute(xzimgMagicFace.faceModelObj.uvs, 2));
-    faceGeometry.setIndex(new THREE.BufferAttribute(xzimgMagicFace.faceModelObj.faces, 1));
+    faceGeometry.setAttribute('position', new THREE.BufferAttribute(facefMagicFace.faceModelObj.vertices, 3));
+    faceGeometry.setAttribute('uv', new THREE.BufferAttribute(facefMagicFace.faceModelObj.uvs, 2));
+    faceGeometry.setIndex(new THREE.BufferAttribute(facefMagicFace.faceModelObj.faces, 1));
 
     faceGeometry.computeBoundingSphere();
     faceGeometry.computeBoundingBox();
@@ -284,21 +283,21 @@ export function updateSize(video, videoCanvas) {
     });
 }
 
-export function renderThreejs(xzimgMagicFace) {
+export function renderThreejs(facefMagicFace) {
     objects.forEach(obj => {
         // if (obj)
         //     obj.visible = false;
     });
 
-    if (xzimgMagicFace.isFaceDetected) {
-        //let idx = xzimgMagicFace.getDetectedObjectID(0);
+    if (facefMagicFace.isFaceDetected) {
+        //let idx = facefMagicFace.getDetectedObjectID(0);
         // Prepare position
-        let t = xzimgMagicFace.getObjectPosition()
+        let t = facefMagicFace.getObjectPosition()
 
         // Prepare orientation
-        let R = xzimgMagicFace.getObjectRotation()
+        let R = facefMagicFace.getObjectRotation()
         const pos = new THREE.Vector3();
-        const quat = new THREE.Quaternion;
+        const quat = new THREE.Quaternion();
         const scale = new THREE.Vector3();
         var l_transfMatrix = new THREE.Matrix4();
         l_transfMatrix.set(
@@ -371,9 +370,9 @@ export function renderThreejs(xzimgMagicFace) {
 
         // Update vertices positions
         for (let i = 0; i < 730 * 3;) {
-            faceMask.geometry.attributes.position.array[i] = -xzimgMagicFace.faceVertices[i++];   // x mirror
-            faceMask.geometry.attributes.position.array[i] = xzimgMagicFace.faceVertices[i++];    // y
-            faceMask.geometry.attributes.position.array[i] = xzimgMagicFace.faceVertices[i++];    // z
+            faceMask.geometry.attributes.position.array[i] = -facefMagicFace.faceVertices[i++];   // x mirror
+            faceMask.geometry.attributes.position.array[i] = facefMagicFace.faceVertices[i++];    // y
+            faceMask.geometry.attributes.position.array[i] = facefMagicFace.faceVertices[i++];    // z
         }
         faceMask.geometry.attributes.position.needsUpdate = true;
         faceMask.visible = true;

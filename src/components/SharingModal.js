@@ -62,26 +62,13 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
           <li className="button-share"> <img src="img/pic.svg" alt="" onClick={downloadImage} /> </li>
         </ul>
       </div>
-      <form className="shareForm">
-        <div className="group">
-          <label htmlFor="yourMail">Your email</label>
-          <input id="yourMail" type="email" />
-        </div>
-        <div className="group">
-          <label htmlFor="friendMail">Friend's Mail</label>
-          <input id="friendMail" type="email" />
-        </div>
-        <button>submit</button>
-
-      </form>
-
-
+    
       <button
         className="closeSharingModal"
         onClick={e => {
           closeModal(e);
         }}
-      >X</button>
+      >(X) CLOSE</button>
 
     </div>
   )
