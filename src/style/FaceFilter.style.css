@@ -9,24 +9,6 @@
   position: fixed;
 }
 
-.cameraButton {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  bottom: 0;
-  margin: auto;
-  left: 0;
-  right: 0;
-  background: rgba(255, 255, 255, 0.459);
-  border-radius: 55px;
-}
-
-.cameraButton img {
-  width: 100%;
-  opacity: .5;
-  padding: 20px;
-}
-
 #facef-video {
   width: 100vw !important;
   height: 100vh !important;
@@ -55,18 +37,6 @@
   width: 30%;
   height: 2em;
   -webkit-appearance: none;
-}
-
-.red-button {
-  padding: 20px;
-  border-radius: 33px;
-  background: red;
-}
-
-.green-button {
-  padding: 20px;
-  border-radius: 33px;
-  background: green;
 }
 
 .videosource {

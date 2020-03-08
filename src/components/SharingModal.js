@@ -18,11 +18,11 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
       case 'fb':
         window.open('http://www.facebook.com/sharer.php?u=' + {SnapUrl} + '&t=' + encodeURIComponent('Ar Snap'), 'sharer', 'toolbar=0,status=0,width=626,height=436');
         break;
-      case 'insta':
+      case 'instagram':
         // window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent({SnapUrl}) + '&t=' + encodeURIComponent('Ar Snap'), 'sharer', 'toolbar=0,status=0,width=626,height=436');
         break;
-      case 'pin':
-        window.open('https://pinterest.com/pin/create/button/?media=' + encodeURIComponent({SnapUrl}), 'sharer', 'toolbar=0,status=0,width=626,height=436');
+      case 'twitter':
+        //window.open('https://pinterest.com/pin/create/button/?media=' + encodeURIComponent({SnapUrl}), 'sharer', 'toolbar=0,status=0,width=626,height=436');
         break;
       default:
         break;
@@ -32,7 +32,7 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
 
   const downloadImage = (e) => {
     var link = document.createElement('a');
-    link.download = 'snap.jpg';
+    link.download = 'MyAwesomePhoto.jpg';
     link.href = SnapUrl;
     link.click();
   }
@@ -41,7 +41,7 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
     <div className="sharingModal">
 
       <div className="header">
-        <h1>You look amazing!</h1>
+        <h1>you look amazing!</h1>
       </div>
 
       <div className="photoWrapper" >
@@ -51,15 +51,15 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
       </div>
 
       <div className="shareMessagingWrapper">
-        <span className="shareMessaging">Share this look with your friends!</span>
+        <span className="shareMessaging">share this look with your friends!</span>
       </div>
 
       <div className="shareButtons">
         <ul>
-          <li className="button-share"> <img src="img/fb.svg" alt="" id="fb" onClick={ShareImage} /> </li>
-          <li className="button-share"> <img src="img/insta.svg" alt="" id="insta" onClick={ShareImage} /> </li>
-          <li className="button-share"> <img src="img/pin.svg" alt="" id="pin" onClick={ShareImage} /> </li>
-          <li className="button-share"> <img src="img/pic.svg" alt="" onClick={downloadImage} /> </li>
+          <li className="button-share"> <img src="img/Facebook.png" alt="" id="fb" onClick={ShareImage} /> </li>
+          <li className="button-share"> <img src="img/Instagram.png" alt="" id="instagram" onClick={ShareImage} /> </li>
+          <li className="button-share"> <img src="img/Twitter.png" alt="" id="twitter" onClick={ShareImage} /> </li>
+          <li className="button-share"> <img src="img/Download.png" alt="" onClick={downloadImage} /> </li>
         </ul>
       </div>
     
@@ -68,7 +68,7 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
         onClick={e => {
           closeModal(e);
         }}
-      >(X) CLOSE</button>
+      >take another!</button>
 
     </div>
   )

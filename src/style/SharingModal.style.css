@@ -13,34 +13,38 @@
 }
 
 .sharingModal h1 {
-  font-size: 3em;
-  padding-top:2em;
+  font-size: 2em;
+  margin-top:1em;
+  margin-bottom:1em;
+  font-weight:500;
 }
 
 .sharingModal .closeSharingModal {
-  margin: 1%;
+  margin: 3em;
+  padding:.5em;
   background-color: none;
   background: none;
   box-shadow: none;
-  border: 0;
-  font-size: 1.5em;
-  position:absolute;
-  top:2%;
-  left:2%;
+  font-weight:500;
+  font-size: 1.25em;
+  border: black solid .1em;
+
 }
 
 .shareMessagingWrapper {
-  margin:1em;
-  font-size:2em;
+  margin-top:1.5em;
+  margin-bottom:1em;
+  font-size:1.25em;
+  font-weight:500;
 
 }
 
 .shareForm .group {
-  padding: 6px;
+  padding: .25em;
 }
 
 .shareForm .group input {
-  margin: 0 4px;
+  margin: 0 .25em;
 }
 
 .sharingModal .closeSharingModal:hover {
@@ -50,9 +54,18 @@
 li.button-share img {
   width: 3em;
   height: 3em;
-  margin-left:1em;
-  margin-right:1em;
+  margin-left:.5em;
+  margin-right:.5em;
 }
+
+li.button-share img:active {
+  width: 3em;
+  height: 3em;
+  margin-left:.5em;
+  margin-right:.5em;
+  opacity:.5;
+}
+
 
 .shareButtons ul {
   padding-inline-start: 0;
@@ -60,7 +73,7 @@ li.button-share img {
 
 .shareButtons li {
   display: inline;
-  padding: 0px 4px;
+  padding: 0 .25em;
 }
 
 .shareButtons li:hover {
@@ -69,10 +82,12 @@ li.button-share img {
 
 .photoWrapper .photo {
   display: inline-block;
-  margin: 0 0px;
-  padding:.5em;
-  width: 50%;
-  border: rgb(143, 143, 143) solid 1px;
+  margin: 0 0;
+  padding: .5em .5em .2em .5em;
+  width: 80%;
+  height: auto;
+
+  border: rgb(143, 143, 143) solid .1em;
 }
 
 .photoWrapper .photo img {

@@ -102,8 +102,13 @@ typings/
 
 # TernJS port file
 .tern-port
-.DS_Store
+*/.DS_Store
 .DS_Store
 public/.DS_Store
-.DS_Store
+
+src/.DS_Store
+src/components/.DS_Store
+public/.DS_Store
+src/.DS_Store
+src/components/.DS_Store
 public/.DS_Store
