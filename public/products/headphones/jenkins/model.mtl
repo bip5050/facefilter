@@ -1,0 +1,57 @@
+# Blender MTL File: 'Products.blend'
+# Material Count: 4
+
+newmtl cgaxis_models_59_11_01
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.287112 0.610093 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_01_Normal.png
+map_Kd /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_01_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_01_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_01_Metallic.png
+
+newmtl cgaxis_models_59_11_02
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.287112 0.610093 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_02_Normal.png
+map_Kd /Users/shawwalters/Downloads/Shaw Textures/Rose Gold Headphones/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_01_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_02_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_02_Metallic.png
+
+newmtl cgaxis_models_59_11_03
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.963419 0.972490 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_03_Normal.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_03_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_03_Metallic.png
+
+newmtl cgaxis_models_59_11_04
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.287112 0.610093 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_04_Normal.png
+map_Kd /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_04_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_04_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_04_Metallic.png

@@ -1,0 +1,31 @@
+# Blender MTL File: 'Products.blend'
+# Material Count: 2
+
+newmtl Material.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.618182
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_Normal.png
+map_Kd /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_Metallic.png
+
+newmtl Material.003
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.618182
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_Normal.png
+map_Kd /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_Roughness.png
+map_d /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_BaseColor.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_Metallic.png

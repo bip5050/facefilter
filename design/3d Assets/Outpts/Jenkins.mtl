@@ -1,0 +1,195 @@
+# Blender MTL File: 'Products.blend'
+# Material Count: 18
+
+newmtl Default_OBJ
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd /Users/public/products/lipstick.png
+
+newmtl Material.001
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.618182
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_Normal.png
+map_Kd /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.001_Metallic.png
+
+newmtl Material.003
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 0.618182
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_Normal.png
+map_Kd /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_BaseColor.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_Roughness.png
+map_d /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_BaseColor.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/newglasses4shaw_Material.003_Metallic.png
+
+newmtl bracepiece
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl earCaps
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl earCops
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl earPivots
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl earpads
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl foamPieces
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl framemat.001
+Ns 225.000000
+Ka 0.949495 0.949495 0.949495
+Kd 0.800000 0.457540 0.000000
+Ks 0.782828 0.782828 0.782828
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+
+newmtl framemat.silver
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl glassmat
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl glassmat.001
+Ns 323.999994
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+
+newmtl headBrace
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl headphonemat
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.963419 0.972490 1.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Bump /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_03_Normal.png
+map_Ns /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_03_Roughness.png
+refl /Users/shawwalters/Downloads/Sony_headphones_fbx/cgaxis_models_volume_59_11_obj_cgaxis_models_59_11_03_Metallic.png
+
+newmtl strutbars
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl wire_088144225
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+
+newmtl wire_177028149
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
