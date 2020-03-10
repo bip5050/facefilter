@@ -10,7 +10,7 @@ const ProductCategories = {
 }
 
 
-const Product = Struct('id', 'category', 'name', 'previewImageUrl', 'data');
+const Product = Struct('id', 'category', 'name', 'previewImageUrls', 'data');
 const ProductData = Struct('position', 'rotation', 'scale', 'modelUrl', 'materials');
 
 

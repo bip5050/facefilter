@@ -15,3 +15,24 @@ margin-left:1em;
 margin-right:1em;
 text-transform: lowercase;
 }
+
+.productVariants{
+  display: flex;
+  width: 100%;
+  position: absolute;
+  bottom: 200px;
+  align-content: center;
+  justify-content: center;
+}
+.productVariants img{
+  width: 40px;
+  height: 40px;
+  z-index: 100;
+  margin: 6px;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.productVariants img:hover{
+transform: scale(1.2);
+}

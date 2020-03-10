@@ -60,8 +60,8 @@ export function initThreejs(fovy, video, videoCanvas) {
     camera3D.position.set(0, 0, 0);
     scene3D.add(camera3D);
 
-//    var geometry = new THREE.BoxGeometry(1, 1, 1);
-//    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    //    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    //    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 
 
 
@@ -186,7 +186,22 @@ export function createFaceGeometry(facefMagicFace) {
 // this is to avoid load dupliate models
 var loading = false;
 
+var currentProduct;
+
+export function ChangeVariantTexTure(index) {
+
+    var tex = new THREE.TextureLoader().load(currentProduct.data.materials[0].maps[index]);
+    if (currentProduct.category === "Lipstick" || currentProduct.category === "Eyebrows" || currentProduct.category === "Mascara")
+        faceMask.material.map = tex;
+        else
+    currentObj.children[0].material[0].map = tex
+}
+
+
+
 export function addProduct(product) {
+
+    currentProduct = product;
 
     if (loading) return;
     loading = true;

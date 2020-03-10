@@ -11,7 +11,7 @@ function MakeProduct(...vars) {
 }
 
 const ProductList = [
-    MakeProduct(ProductCategories.EYEWEAR, 'Navigator', 'products/eyewear/navigator/preview.jpg',
+    MakeProduct(ProductCategories.EYEWEAR, 'Navigator', ['products/eyewear/navigator/preview.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/eyewear/navigator/model.obj', [
             {
                 maps: [],
@@ -34,10 +34,13 @@ const ProductList = [
 
             }
         ])),
-    MakeProduct(ProductCategories.HEADSET, 'demoset', 'products/headset/navigator/preview.jpg',
+    MakeProduct(ProductCategories.HEADSET, 'demoset', ['products/headset/preview1.jpg', 'products/headset/preview2.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/headset/model.obj', [
             {
-                maps: [],
+                maps: [
+                    'products/headset/texture1.jpg',
+                    'products/headset/texture2.jpg'
+                ],
                 normalMap: null,
                 envMap: 'products/envmap.jpg',
                 opacity: .6,
@@ -47,7 +50,7 @@ const ProductList = [
 
             },
             {
-                maps: ['products/eyewear/navigator/texture.jpg'],
+                maps: [],
                 normalMap: null,
                 envMap: 'products/envmap.jpg',
                 opacity: 1,
@@ -57,7 +60,7 @@ const ProductList = [
 
             }
         ])),
-    MakeProduct(ProductCategories.EYEWEAR, 'Lovely', 'products/eyewear/lovely/preview.jpg',
+    MakeProduct(ProductCategories.EYEWEAR, 'Lovely', ['products/eyewear/lovely/preview.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/eyewear/lovely/model.obj',
             [
                 {
@@ -83,11 +86,19 @@ const ProductList = [
             ]
 
         )),
-    MakeProduct(ProductCategories.LIPSTICK, 'Charm', '',
+    MakeProduct(ProductCategories.LIPSTICK, 'Charm', [
+        'products/lipstick/charm/preview1.jpg',
+        'products/lipstick/charm/preview2.jpg',
+        'products/lipstick/charm/preview3.jpg'
+    ],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], '',
             [
                 {
-                    maps: ['products/lipstick/charm/texture.png'],
+                    maps: [
+                        'products/lipstick/charm/texture1.png',
+                        'products/lipstick/charm/texture2.png',
+                        'products/lipstick/charm/texture3.png'
+                    ],
                     normalMap: null,
                     opacity: .3,
                     metalness: 0,
@@ -99,7 +110,7 @@ const ProductList = [
             ]
         )),
 
-    MakeProduct(ProductCategories.MASCARA, 'Charm', '',
+    MakeProduct(ProductCategories.MASCARA, 'Charm', [],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], '',
             [
                 {
@@ -114,7 +125,7 @@ const ProductList = [
                 }
             ]
         )),
-    MakeProduct(ProductCategories.EYEBROW, 'Glam', '',
+    MakeProduct(ProductCategories.EYEBROW, 'Glam', [],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], '',
             [
                 {
@@ -129,7 +140,7 @@ const ProductList = [
                 }
             ]
         )),
-    MakeProduct(ProductCategories.LIPSTICK, 'Glam', 'products/lipstick/glam/preview.jpg',
+    MakeProduct(ProductCategories.LIPSTICK, 'Glam', ['products/lipstick/glam/preview.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/lipstick/glam/model.obj', [
             {
                 maps: ['products/lipstick/glam/texture.png'],
@@ -143,7 +154,7 @@ const ProductList = [
 
             }
         ])),
-    MakeProduct(ProductCategories.LIPSTICK, 'Pinup', 'products/lipstick/pinup/preview.jpg',
+    MakeProduct(ProductCategories.LIPSTICK, 'Pinup', ['products/lipstick/pinup/preview.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/lipstick/pinup/model.obj',
             [
                 {

@@ -16,14 +16,13 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
 
     switch (e.target.id) {
       case 'fb':
-        window.open('http://www.facebook.com/sharer.php?u=' + {SnapUrl} + '&t=' + encodeURIComponent('Ar Snap'), 'sharer', 'toolbar=0,status=0,width=626,height=436');
+        window.open('http://www.facebook.com/sharer.php?u=' + { SnapUrl } + '&t=' + encodeURIComponent('Ar Snap'), 'sharer', 'toolbar=0,status=0,width=626,height=436');
         break;
       case 'instagram':
         // window.open('http://www.facebook.com/sharer.php?u=' + encodeURIComponent({SnapUrl}) + '&t=' + encodeURIComponent('Ar Snap'), 'sharer', 'toolbar=0,status=0,width=626,height=436');
         break;
       case 'twitter':
-        //window.open('https://pinterest.com/pin/create/button/?media=' + encodeURIComponent({SnapUrl}), 'sharer', 'toolbar=0,status=0,width=626,height=436');
-        break;
+        window.open('https://twitter.com/share?url=' + encodeURIComponent({ SnapUrl }), 'sharer', 'toolbar=0,status=0,width=626,height=436'); break;
       default:
         break;
     }
@@ -62,7 +61,7 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
           <li className="button-share"> <img src="img/Download.png" alt="" onClick={downloadImage} /> </li>
         </ul>
       </div>
-    
+
       <button
         className="closeSharingModal"
         onClick={e => {
