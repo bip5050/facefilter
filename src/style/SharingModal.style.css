@@ -86,12 +86,10 @@ li.button-share img:active {
 
 .photoWrapper .photo {
   display: inline-block;
-  width: 80%;
-  height: 80%;
+  width: 80vw;
+  height: 80vw;
   margin: 0 0;
-  padding: .5em .5em .2em .5em;
-  width: auto;
-  height: auto;
+  padding: .5em .5em .5em .5em;
 
   border: rgb(143, 143, 143) solid 1px;
 }
