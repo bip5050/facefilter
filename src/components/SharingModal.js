@@ -67,7 +67,7 @@ const SharingModal = ({ showModal, onClose, SnapUrl }) => {
         onClick={e => {
           closeModal(e);
         }}
-      >take another!</button>
+      >X</button>
 
     </div>
   )
