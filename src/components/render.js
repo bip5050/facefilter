@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OBJLoader } from './OBJLoader';
 
 const $ = window.$;
+const TweenMax = window.TweenMax;
 
 var currentObj;
 
@@ -193,9 +194,27 @@ export function ChangeVariantTexTure(index) {
     var tex = new THREE.TextureLoader().load(currentProduct.data.materials[0].maps[index]);
     if (currentProduct.category === "Lipstick" || currentProduct.category === "Eyebrows" || currentProduct.category === "Mascara")
         faceMask.material.map = tex;
-        else
-    currentObj.children[0].material[0].map = tex
+    else
+        currentObj.children[0].material[0].map = tex
 }
+
+
+function FadeInMat(mat) {
+
+    var temp = mat.opacity;
+
+    mat.opacity = 0;
+
+    TweenMax.to(mat, .5, { opacity: temp });
+
+
+}
+
+function FadeOutMat(mat) {
+
+    TweenMax.to(mat, .5, { opacity: 0 });
+}
+
 
 
 
@@ -208,8 +227,21 @@ export function addProduct(product) {
 
     $('.loadingscreen').fadeIn();
 
-    if (currentObj)
-        scene3D.remove(currentObj);
+    if (currentObj) {
+
+        var obj = currentObj;
+
+
+        scene3D.remove(obj);
+
+
+        // FadeOutMat(obj.children[0].material);
+
+        // setTimeout(() => {
+        //     scene3D.remove(obj);
+        // }, 500);
+    }
+
 
 
     var matArray = [];
@@ -236,6 +268,11 @@ export function addProduct(product) {
         addObj(product.data.modelUrl, matArray, rtnObj => {
             $('.loadingscreen').fadeOut();
             currentObj = rtnObj;
+
+            currentObj.children[0].material.forEach(mat => {
+                FadeInMat(mat);
+            })
+
             loading = false;
 
             // var json = rtnObj.children[0].geometry.toJSON();
@@ -258,6 +295,7 @@ export function addProduct(product) {
     if (product.category === "Lipstick" || product.category === "Eyebrows" || product.category === "Mascara") {
         realMask.visible = false;
         faceMask.material = matArray[0];
+        FadeInMat(faceMask.material);
         $('.loadingscreen').fadeOut();
         loading = false;
 
