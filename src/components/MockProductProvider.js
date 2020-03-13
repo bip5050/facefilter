@@ -177,7 +177,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 0,
                 roughness: .4,
-                transparent: false
+                transparent: true
 
             }, {
                 maps: [
@@ -189,7 +189,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 0,
                 roughness: .4,
-                transparent: false
+                transparent: true
 
             }
         ])),
@@ -207,7 +207,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 0,
                 roughness: .4,
-                transparent: false
+                transparent: true
             }, {
                 maps: [
                     'products/headphones/maxwell/texture_white.jpg',
@@ -218,7 +218,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 0,
                 roughness: .4,
-                transparent: false
+                transparent: true
             },
             {
                 maps: [
@@ -230,7 +230,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 0,
                 roughness: .4,
-                transparent: false
+                transparent: true
             }
         ])),
 
@@ -245,7 +245,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 0,
                 roughness: .4,
-                transparent: false
+                transparent: true
 
             } , {
                 maps: [
@@ -255,7 +255,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 opacity: 1,
                 metalness: 1,
                 roughness: .0,
-                transparent: false
+                transparent: true
 
             }
         ]))
