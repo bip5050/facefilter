@@ -43,7 +43,7 @@
   display: none;
 }
 
-.loadingScreen{
+.loadingMessage{
   position: fixed;
   width: 6em;
   height: 2.5em;
@@ -60,7 +60,7 @@
   text-align: center;
 }
 
-.loadingScreen p {
+.loadingMessage p {
 padding:0em;
 margin:0em;
 }

@@ -225,7 +225,7 @@ export function addProduct(product) {
     if (loading) return;
     loading = true;
 
-    $('.loadingscreen').fadeIn();
+    $('.loadingMessage').fadeIn();
 
     if (currentObj) {
 
@@ -266,7 +266,7 @@ export function addProduct(product) {
     if (product.category === "Eyewear" || product.category === "HeadSet") {
         realMask.visible = true;
         addObj(product.data.modelUrl, matArray, rtnObj => {
-            $('.loadingscreen').fadeOut();
+            $('.loadingMessage').fadeOut();
             currentObj = rtnObj;
 
             currentObj.children[0].material.forEach(mat => {
@@ -296,7 +296,7 @@ export function addProduct(product) {
         realMask.visible = false;
         faceMask.material = matArray[0];
         FadeInMat(faceMask.material);
-        $('.loadingscreen').fadeOut();
+        $('.loadingMessage').fadeOut();
         loading = false;
 
     }

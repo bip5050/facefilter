@@ -65,7 +65,7 @@ export const FaceFilter = () => {
 
         function onLoadCompleted() {
 
-            $('.loadingscreen').fadeOut();
+            $('.loadingMessage').fadeOut();
 
             setInterval(() => {
                 facef.initialize();
@@ -153,7 +153,7 @@ export const FaceFilter = () => {
 
     return (
         <div className="row arcomp">
-            <div className="loadingscreen">
+            <div className="loadingMessage">
                 <p>fetching...</p>
             </div>
             <div className="face-filter">
