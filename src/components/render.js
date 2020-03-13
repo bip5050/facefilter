@@ -191,11 +191,20 @@ var currentProduct;
 
 export function ChangeVariantTexTure(index) {
 
-    var tex = new THREE.TextureLoader().load(currentProduct.data.materials[0].maps[index]);
+    var tex;
+    if(currentProduct.data.materials[0].maps.length >0)
+     tex = new THREE.TextureLoader().load(currentProduct.data.materials[0].maps[index]);
+    if (tex == null) tex = new THREE.TextureLoader().load(currentProduct.data.materials[1].maps[index]);
     if (currentProduct.category === "Lipstick" || currentProduct.category === "Eyebrows" || currentProduct.category === "Mascara")
         faceMask.material.map = tex;
     else
-        currentObj.children[0].material[0].map = tex
+    {
+        if(currentObj.children[0] != null && currentObj.children[0].material[0] != null && currentObj.children[0].material[0].map != null) currentObj.children[0].material[0].map = tex
+        else if(currentObj.children[1] != null && currentObj.children[1].material[0] != null && currentObj.children[1].material[0].map) currentObj.children[1].material[0].map = tex
+        else if(currentObj.children[0] != null && currentObj.children[0].material[1] != null && currentObj.children[0].material[1].map != null) currentObj.children[0].material[1].map = tex
+        else if(currentObj.children[1] != null && currentObj.children[1].material[1] != null && currentObj.children[1].material[1].map) currentObj.children[1].material[1].map = tex
+    }
+        
 }
 
 
@@ -263,7 +272,7 @@ export function addProduct(product) {
 
     });
 
-    if (product.category === "Eyewear" || product.category === "HeadSet") {
+    if (product.category === "Eyewear" || product.category === "Headphones") {
         realMask.visible = true;
         addObj(product.data.modelUrl, matArray, rtnObj => {
             $('.loadingMessage').fadeOut();

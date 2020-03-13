@@ -4,7 +4,7 @@ const Struct = (...keys) => ((...v) => keys.reduce((o, k, i) => { o[k] = v[i]; r
 const ProductCategories = {
     EYEWEAR: 'Eyewear',
     LIPSTICK: 'Lipstick',
-    HEADSET:'HeadSet',
+    HEADPHONES:'Headphones',
     MASCARA:'Mascara',
     EYEBROW:'Eyebrows'
 }
