@@ -43,7 +43,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                     transparent: true
                 }
                 
-            ]
+            ], ""
         )),
 
         MakeProduct(ProductCategories.EYEWEAR, 'Kinsey', [  'products/eyewear/kinsey/preview_gold.jpg',
@@ -71,7 +71,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 roughness: .05,
                 transparent: true
             }
-        ])),
+        ], "")),
 
         MakeProduct(ProductCategories.EYEWEAR, 'Lovely', [  'products/eyewear/lovely/preview_silver.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/eyewear/lovely/model.obj',
@@ -95,7 +95,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                     roughness: 0,
                     transparent: true
                 }
-            ]
+            ], ""
         )),
 
             // LIPSTICK
@@ -121,7 +121,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
 
 
                 }
-            ]
+            ], ""
         )),
         MakeProduct(ProductCategories.LIPSTICK, 'Glam', [   'products/lipstick/glam/preview1.jpg',
                                                             'products/lipstick/glam/preview2.jpg',
@@ -140,7 +140,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
 
 
             }
-        ])),
+        ], "")),
     MakeProduct(ProductCategories.LIPSTICK, 'Pinup', [  'products/lipstick/pinup/preview1.jpg',
                                                         'products/lipstick/pinup/preview2.jpg',
                                                         'products/lipstick/pinup/preview3.jpg'],
@@ -159,7 +159,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
 
 
                 }
-            ]
+            ], ""
         )),
 
 
@@ -192,7 +192,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 transparent: true
 
             }
-        ])),
+        ], "")),
 
         MakeProduct(ProductCategories.HEADPHONES, 'Maxwell', [  'products/headphones/maxwell/preview_white.jpg',
                                                                 'products/headphones/maxwell/preview_black.jpg'],
@@ -232,7 +232,7 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 roughness: .4,
                 transparent: true
             }
-        ])),
+        ], "")),
 
         MakeProduct(ProductCategories.HEADPHONES, 'Arena', ['products/headphones/arena/preview_black.jpg'],
         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], 'products/headphones/arena/model.obj', [
@@ -258,19 +258,41 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 transparent: true
 
             }
-        ]))
+        ], ""))
+        
+        // ,
 
-    
+        // MakeProduct(ProductCategories.FOUNDATION, 'Foundation', [
+        //     'products/foundation/preview1.jpg',
+        //     'products/foundation/preview2.jpg',
+        //     'products/foundation/preview3.jpg'
+        // ],
+        //     ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], '',
+        //         [
+        //             {
+        //                 maps: [
+        //                     'products/foundation/texture1.png',
+        //                     'products/foundation/texture2.png',
+        //                     'products/foundation/texture3.png'
+        //                 ],
+        //                 normalMap: null,
+        //                 opacity: .3,
+        //                 metalness: 0,
+        //                 roughness: 1,
+        //                 transparent: true
+        //             }
+        //         ], "Unlit"
+        //     )),
 
 
-        // MASCARA
+        // FOUNDATION
         
 
-//     MakeProduct(ProductCategories.MASCARA, 'Charm', [],
+//     MakeProduct(ProductCategories.FOUNDATION, 'Charm', [],
 //         ProductData([0, 0, 0], [0, 0, 0, 0], [1, 1, 1], '',
 //             [
 //                 {
-//                     maps: ['products/mascara/texture.png'],
+//                     maps: ['products/FOUNDATION/texture.png'],
 //                     normalMap: null,
 //                     opacity: 1,
 //                     metalness: 0,

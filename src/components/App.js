@@ -74,8 +74,8 @@ export default class App extends Component {
         <Header currentProductCategory={this.state.currentProductCategory} onCategorySelected={this.onCategorySelected} />
         <ProductMenu productCategory={this.state.currentProductCategory} products={this.state.products} currentProduct={this.state.currentProduct} onProductSelected={this.onProductSelected} />
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
-        <FaceFilter />
-        <CameraButton onPhoto={this.takePhoto} image={this.camImage} />
+        <FaceFilter onReady={this.ready}/>
+        {/* <CameraButton onPhoto={this.takePhoto} image={this.camImage} /> */}
         <SharingModal showModal={this.state.displaySharingModal} SnapUrl={this.state.SnapUrl} onClose={this.closeSharingModal} />
       </div>
 

@@ -82,7 +82,7 @@ export function initThreejs(fovy, video, videoCanvas) {
     scene3D.add(directionalLight);
 
     // Create texture to apply on face
-    faceMaterial = new THREE.MeshStandardMaterial({ transparent: true, opacity: 0 });
+    faceMaterial = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
 
 
 
@@ -195,7 +195,7 @@ export function ChangeVariantTexTure(index) {
     if(currentProduct.data.materials[0].maps.length >0)
      tex = new THREE.TextureLoader().load(currentProduct.data.materials[0].maps[index]);
     if (tex == null) tex = new THREE.TextureLoader().load(currentProduct.data.materials[1].maps[index]);
-    if (currentProduct.category === "Lipstick" || currentProduct.category === "Eyebrows" || currentProduct.category === "Mascara")
+    if (currentProduct.category === "Lipstick" || currentProduct.category === "Eyebrows" || currentProduct.category === "FOUNDATION")
         faceMask.material.map = tex;
     else
     {
@@ -230,26 +230,14 @@ function FadeOutMat(mat) {
 export function addProduct(product) {
 
     currentProduct = product;
+    var obj = currentObj;
 
     if (loading) return;
     loading = true;
 
     $('.loadingMessage').fadeIn();
 
-    if (currentObj) {
 
-        var obj = currentObj;
-
-
-        scene3D.remove(obj);
-
-
-        // FadeOutMat(obj.children[0].material);
-
-        // setTimeout(() => {
-        //     scene3D.remove(obj);
-        // }, 500);
-    }
 
 
 
@@ -265,17 +253,19 @@ export function addProduct(product) {
         if (envMap) envMap.mapping = THREE.EquirectangularReflectionMapping;
 
 
-        var mat = new THREE.MeshStandardMaterial(
+        var m = new THREE.MeshStandardMaterial(
             { map: map, normalMap: normalMap, opacity: opacity, envMap: envMap, roughness: mat.roughness, metalness: mat.metalness, transparent: mat.transparent }
         );
-        matArray.push(mat);
+        matArray.push(m);
 
     });
 
     if (product.category === "Eyewear" || product.category === "Headphones") {
-        realMask.visible = true;
+        if (realMask)realMask.visible = true;
         addObj(product.data.modelUrl, matArray, rtnObj => {
             $('.loadingMessage').fadeOut();
+            if(obj) scene3D.remove(obj);
+
             currentObj = rtnObj;
 
             currentObj.children[0].material.forEach(mat => {
@@ -284,24 +274,13 @@ export function addProduct(product) {
 
             loading = false;
 
-            // var json = rtnObj.children[0].geometry.toJSON();
-
-            // var jsonobject = JSON.stringify(json);
-
-            // var byteArray = [];
-
-            // for (var i = 0; i < jsonobject.length; i++) {
-            //     byteArray.push(jsonobject.charCodeAt(i));
-            // }
-
-            // console.error(byteArray);
-
-
         });
         faceMask.material.opacity = 0;
     }
 
-    if (product.category === "Lipstick" || product.category === "Eyebrows" || product.category === "Mascara") {
+    else if (product.category === "Lipstick" || product.category === "Eyebrows" || product.category === "FOUNDATION") {
+        if(obj) scene3D.remove(obj);
+
         realMask.visible = false;
         faceMask.material = matArray[0];
         FadeInMat(faceMask.material);
@@ -309,10 +288,6 @@ export function addProduct(product) {
         loading = false;
 
     }
-
-
-
-
 }
 
 export function updateSize(video, videoCanvas) {

@@ -1,3 +1,7 @@
+.Dropdown-control {
+  position:relative;
+  right:.5em;
+}
 #facef-sdk-wrapper {
   z-index: -1;
   min-width: 100%;
@@ -51,7 +55,7 @@
   z-index: 1000;
   left: 0;
   right: 0;
-  top: 15%;
+  bottom: 15%;
   padding: .75em;
   border-radius: 1.5em;
   opacity: 80%;

@@ -15,6 +15,11 @@ const $ = window.$;
 
 export const FaceFilter = () => {
 
+  const handleReady = () => {
+      let input = document.getElementsByClassName('initCamera')[0]
+      input.value = "BEGIN"
+      input.disabled = false;
+  }
 
     useEffect(() => {
 
@@ -71,6 +76,8 @@ export const FaceFilter = () => {
                 facef.initialize();
             }, 20000);
 
+            // Change component
+            handleReady()
         }
 
 
@@ -89,7 +96,9 @@ export const FaceFilter = () => {
 
 
         function init() {
-
+            let input = document.getElementsByClassName('initCamera')[0]
+            input.value = "LOADING..."
+            input.disabled = true;
             var loaded = false;
             initThreejs(facefConfig.fovY, getVideo(), getVideoCanvas());
 

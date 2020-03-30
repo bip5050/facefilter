@@ -363,8 +363,8 @@ var OBJLoader = ( function () {
 					this.addVertexLine( this.parseVertexIndex( vertices[ vi ], vLen ) );
 
 				}
-
-				for ( var uvi = 0, l = uvs.length; uvi < l; uvi ++ ) {
+				var uvi
+				for ( uvi = 0, l = uvs.length; uvi < l; uvi ++ ) {
 
 					this.addUVLine( this.parseUVIndex( uvs[ uvi ], uvLen ) );
 
@@ -493,7 +493,8 @@ var OBJLoader = ( function () {
 								parseFloat( data[ 2 ] )
 							);
 							break;
-
+default:
+	break;
 					}
 
 				} else if ( lineFirstChar === 'f' ) {
@@ -521,7 +522,7 @@ var OBJLoader = ( function () {
 
 					var v1 = faceVertices[ 0 ];
 
-					for ( var j = 1, jl = faceVertices.length - 1; j < jl; j ++ ) {
+					for (  j = 1, jl = faceVertices.length - 1; j < jl; j ++ ) {
 
 						var v2 = faceVertices[ j ];
 						var v3 = faceVertices[ j + 1 ];
@@ -559,7 +560,7 @@ var OBJLoader = ( function () {
 
 				} else if ( lineFirstChar === 'p' ) {
 
-					var lineData = line.substr( 1 ).trim();
+					lineData = line.substr( 1 ).trim();
 					var pointData = lineData.split( " " );
 
 					state.addPointGeometry( pointData );
@@ -649,7 +650,7 @@ var OBJLoader = ( function () {
 			var container = new Group();
 			container.materialLibraries = [].concat( state.materialLibraries );
 
-			for ( var i = 0, l = state.objects.length; i < l; i ++ ) {
+			for ( i = 0, l = state.objects.length; i < l; i ++ ) {
 
 				var object = state.objects[ i ];
 				var geometry = object.geometry;
@@ -696,7 +697,7 @@ var OBJLoader = ( function () {
 
 					var sourceMaterial = materials[ mi ];
 					var materialHash = sourceMaterial.name + '_' + sourceMaterial.smooth + '_' + hasVertexColors;
-					var material = state.materials[ materialHash ];
+					material = state.materials[ materialHash ];
 
 					if ( this.materials !== null ) {
 
@@ -756,9 +757,9 @@ var OBJLoader = ( function () {
 
 				if ( createdMaterials.length > 1 ) {
 
-					for ( var mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
+					for ( mi = 0, miLen = materials.length; mi < miLen; mi ++ ) {
 
-						var sourceMaterial = materials[ mi ];
+						 sourceMaterial = materials[ mi ];
 						buffergeometry.addGroup( sourceMaterial.groupStart, sourceMaterial.groupCount, mi );
 
 					}

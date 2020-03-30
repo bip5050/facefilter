@@ -3,7 +3,6 @@ import style from "../style/CameraPermissionOverlay.style.css"
 
 export default function CameraPermissionOverlay ({display, onClose}) {
 
-
   const renderPage = () => {
   return (
     <div className="overlay">
