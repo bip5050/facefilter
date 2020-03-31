@@ -169,7 +169,7 @@ export function createFaceGeometry(facefMagicFace) {
 
     faceMask = new THREE.Mesh(faceGeometry, faceMaterial);
 
-    scene3D.add(faceMask);
+    scene3D.remove(faceMask)
 
     var MaskMat = new THREE.MeshBasicMaterial();
     MaskMat.colorWrite = false;
@@ -262,6 +262,7 @@ export function addProduct(product) {
 
     if (product.category === "Eyewear" || product.category === "Headphones") {
         if (realMask)realMask.visible = true;
+        scene3D.remove(faceMask)
         addObj(product.data.modelUrl, matArray, rtnObj => {
             $('.loadingMessage').fadeOut();
             if(obj) scene3D.remove(obj);
@@ -275,12 +276,11 @@ export function addProduct(product) {
             loading = false;
 
         });
-        faceMask.material.opacity = 0;
     }
 
     else if (product.category === "Lipstick" || product.category === "Eyebrows" || product.category === "FOUNDATION") {
         if(obj) scene3D.remove(obj);
-
+        scene3D.add(faceMask)
         realMask.visible = false;
         faceMask.material = matArray[0];
         FadeInMat(faceMask.material);

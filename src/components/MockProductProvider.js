@@ -14,7 +14,46 @@ const ProductList = [
 
 // EYEWEAR
 
-
+// EYEWEAR
+MakeProduct(
+    ProductCategories.EYEWEAR,
+    "Wayfarer",
+    [
+      "products/eyewear/wayfarer/preview1.jpg",
+      "products/eyewear/wayfarer/preview2.jpg",
+      "products/eyewear/wayfarer/preview3.jpg"
+    ],
+    ProductData(
+      [0, 0, 0],
+      [0, 0, 0, 0],
+      [1, 1, 1],
+      "products/eyewear/wayfarer/model.obj",
+      [
+        {
+          maps: [
+            "products/eyewear/wayfarer/texture1.jpg",
+            "products/eyewear/wayfarer/texture2.jpg",
+            "products/eyewear/wayfarer/texture3.jpg"
+          ],
+          normalMap: null,
+          envMap: "products/envmap.jpg",
+          opacity: 0.8,
+          metalness: 0.3,
+          roughness: 0.2,
+          transparent: true
+        },
+        {
+          maps: [],
+          normalMap: null,
+          envMap: "products/envmap.jpg",
+          opacity: 0.3,
+          metalness: 1,
+          roughness: 0,
+          transparent: true
+        }
+      ]
+    )
+  ),
 MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/preview_tortoise.jpg',
                                                     'products/eyewear/janie/preview_black.jpg',
                                                     'products/eyewear/janie/preview_red.jpg', ],
