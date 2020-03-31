@@ -209,13 +209,13 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
             {
                 maps: [
                     'products/headphones/jenkins/texture_white.jpg',
-                    'products/headphones/jenkins/texture_black.jpg'
+                    'products/headphones/jenkins/texture_white.jpg'
                 ],
                 normalMap: null,
                 envMap: 'products/envmap.jpg',
                 opacity: 1,
-                metalness: 0,
-                roughness: .4,
+                metalness: .1,
+                roughness: .0,
                 transparent: true
 
             }, {
@@ -226,8 +226,8 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 normalMap: null,
                 envMap: 'products/envmap.jpg',
                 opacity: 1,
-                metalness: 0,
-                roughness: .4,
+                metalness: .0,
+                roughness: .6,
                 transparent: true
 
             }
@@ -244,19 +244,19 @@ MakeProduct(ProductCategories.EYEWEAR, 'Janie', [   'products/eyewear/janie/prev
                 normalMap: null,
                 envMap: 'products/envmap.jpg',
                 opacity: 1,
-                metalness: 0,
-                roughness: .4,
+                metalness: .4,
+                roughness: .05,
                 transparent: true
             }, {
                 maps: [
-                    'products/headphones/maxwell/texture_white.jpg',
-                    'products/headphones/maxwell/texture_black.jpg'
+                    'products/headphones/maxwell/earcaps.jpg',
+                    'products/headphones/maxwell/earcaps.jpg'
                 ],
                 normalMap: null,
                 envMap: 'products/envmap.jpg',
                 opacity: 1,
                 metalness: 0,
-                roughness: .4,
+                roughness: .5,
                 transparent: true
             },
             {
