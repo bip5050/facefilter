@@ -2,7 +2,7 @@ import React from "react";
 import style from "../style/CameraPermissionOverlay.style.css"
 
 export default function CameraPermissionOverlay ({display, onClose, Disablebtn}) {
-  
+
   const renderPage = () => {
   return (
     <div className="overlay">
@@ -17,7 +17,7 @@ export default function CameraPermissionOverlay ({display, onClose, Disablebtn})
       {/* <button type="button" onClick={e => {onClose(e);}}>BEGIN</button> */}
       <input
         type="button"
-        value="BEGIN"
+        value={Disablebtn ? "LOADING..." : "BEGIN"}
         className="initCamera"
         disabled ={Disablebtn}
         onClick={e => {

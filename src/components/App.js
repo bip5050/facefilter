@@ -25,9 +25,13 @@ export default class App extends Component {
   camImage = 'img/camera.png'
 
   componentDidMount() {
-    this.setState({ 
-      disabledButton: false
-    })
+
+    setTimeout(()=>{
+      this.setState({ 
+        disabledButton: false
+      })
+    },100);
+  
 
   }
 
