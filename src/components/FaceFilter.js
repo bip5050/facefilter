@@ -15,12 +15,6 @@ const $ = window.$;
 
 export const FaceFilter = () => {
 
-  const handleReady = () => {
-      let input = document.getElementsByClassName('initCamera')[0]
-      input.value = "BEGIN"
-      input.disabled = false;
-  }
-
     useEffect(() => {
 
        
@@ -69,15 +63,17 @@ export const FaceFilter = () => {
         }
 
         function onLoadCompleted() {
+            
 
             $('.loadingMessage').fadeOut();
+           
 
             setInterval(() => {
                 facef.initialize();
             }, 20000);
 
             // Change component
-            handleReady()
+           // handleReady()
         }
 
 
@@ -96,9 +92,6 @@ export const FaceFilter = () => {
 
 
         function init() {
-            let input = document.getElementsByClassName('initCamera')[0]
-            input.value = "LOADING..."
-            input.disabled = true;
             var loaded = false;
             initThreejs(facefConfig.fovY, getVideo(), getVideoCanvas());
 
@@ -112,7 +105,7 @@ export const FaceFilter = () => {
                 error => console.log('Error initializing Magic Face: ' + error),
                 progress => {
                     if (progress === 1 && !loaded) {
-                        loaded = true;
+                        loaded = true;  
                         return onLoadCompleted();
                     }
                 }

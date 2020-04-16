@@ -18,14 +18,24 @@ export default class App extends Component {
     currentProductCategory: ProductCategories.EYEWEAR,
     currentProduct: 0,
     products: ProductList,
-    SnapUrl: ''
+    SnapUrl: '',
+    disabledButton: true
   }
 
   camImage = 'img/camera.png'
 
+  componentDidMount() {
+    this.setState({ 
+      disabledButton: false
+    })
+
+  }
+
   initApp = (e) => {
     e.preventDefault()
-    this.setState({ displayOverlay: false })
+    this.setState({ 
+      displayOverlay: false ,
+    })
 
     console.log("App init happens here");
   }
@@ -70,7 +80,7 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <CameraPermissionOverlay display={this.state.displayOverlay} onClose={this.initApp} />
+        <CameraPermissionOverlay display={this.state.displayOverlay} Disablebtn ={this.state.disabledButton} onClose={this.initApp} />
         <Header currentProductCategory={this.state.currentProductCategory} onCategorySelected={this.onCategorySelected} />
         <ProductMenu productCategory={this.state.currentProductCategory} products={this.state.products} currentProduct={this.state.currentProduct} onProductSelected={this.onProductSelected} />
         <ReactResizeDetector handleWidth handleHeight onResize={this.onResize} />
