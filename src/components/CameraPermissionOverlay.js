@@ -14,8 +14,9 @@ export default function CameraPermissionOverlay ({display, onClose}) {
         </div>
 
       {/* Close button */}
+      {/* <button type="button" onClick={e => {onClose(e);}}>BEGIN</button> */}
       <input
-        type="submit"
+        type="button"
         value="BEGIN"
         className="initCamera"
         onClick={e => {
